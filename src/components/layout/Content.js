@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
 import styled from "styled-components";
+import { firestoreDelete } from "../Firebase";
 
 const Main = styled.main`
   background-color: #ffffff;
@@ -105,6 +106,15 @@ const Table = styled.table`
   }
 `;
 
+const ActionButton = styled.button`
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  padding: 0;
+  background-color: transparent;
+`;
+
 const Content = () => {
   const data = useContext(DataContext);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -112,12 +122,18 @@ const Content = () => {
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
+
   useEffect(() => {
     const results = data.entries.filter(item =>
       Object.keys(item).some(key => item[key].includes(searchTerm))
     );
     setSearchResults(results);
   }, [searchTerm, data.entries]);
+
+  const test = id => {
+    console.log(id);
+    firestoreDelete("Links", id);
+  };
 
   return (
     <Main>
@@ -174,8 +190,30 @@ const Content = () => {
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
                 </a>
-                <StyledIcon icon={["fas", "cog"]} fixedWidth />
-                <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
+                <ActionButton
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to delete this item?"
+                      )
+                    )
+                      test(item.id);
+                  }}
+                >
+                  <StyledIcon icon={["fas", "cog"]} fixedWidth />
+                </ActionButton>
+                <ActionButton
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to delete this item?"
+                      )
+                    )
+                      test(item.id);
+                  }}
+                >
+                  <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
+                </ActionButton>
               </td>
             </tr>
           ))}

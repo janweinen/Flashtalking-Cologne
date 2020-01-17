@@ -41,6 +41,12 @@ export const firestoreAdd = async (collection, data) => {
   const store = await database.collection(collection);
   store.add(data);
 };
+
+export const firestoreDelete = async (collection, id) => {
+  console.log(collection, id);
+  const store = await database.collection(collection);
+  store.doc(id).delete();
+};
 /*
 export const firestoreRequest = async (collection, doc) => {
   const request = await database.collection(collection).doc(doc);
