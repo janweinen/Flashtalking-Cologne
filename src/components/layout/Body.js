@@ -6,11 +6,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
   faPlusCircle,
-  faExternalLinkAlt
+  faExternalLinkAlt,
+  faCog,
+  faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
-library.add(faSearch, faPlusCircle, faExternalLinkAlt);
+library.add(faSearch, faPlusCircle, faExternalLinkAlt, faCog, faTrashAlt);
 
 const style = {
   body: {

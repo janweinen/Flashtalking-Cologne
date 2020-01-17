@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { firestoreAdd } from "../Firebase";
+import styled from "styled-components";
 
 const style = {
   overlay: {
@@ -52,6 +53,10 @@ const style = {
   }
 };
 
+const Input = styled.input`
+  display: block;
+`;
+
 const Modal = ({ activator, item }) => {
   const [show, setShow] = useState(false);
   const submit = async event => {
@@ -59,7 +64,11 @@ const Modal = ({ activator, item }) => {
     const form = document.querySelector("#entry");
     const data = {
       client: form.client.value,
-      url: form.url.value
+      branch: form.branch.value,
+      type: form.type.value,
+      device: form.device.value,
+      url: form.url.value,
+      date: new Date().toLocaleString()
     };
     await firestoreAdd("Links", data);
     setShow(false);
@@ -78,9 +87,15 @@ const Modal = ({ activator, item }) => {
         <div style={style.modal.body}>
           <form id="entry">
             <label htmlFor="client">Client:</label>
-            <input type="text" id="client" />
+            <Input type="text" id="client" />
+            <label htmlFor="branch">Branch:</label>
+            <Input type="text" id="branch" />
+            <label htmlFor="type">Type:</label>
+            <Input type="text" id="type" />
+            <label htmlFor="device">Device:</label>
+            <Input type="text" id="device" />
             <label htmlFor="url">URL:</label>
-            <input type="text" id="url" />
+            <Input type="text" id="url" />
             <button id="login" onClick={submit}>
               Submit
             </button>

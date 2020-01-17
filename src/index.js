@@ -19,16 +19,19 @@ const App = () => {
               signedIn: true,
               user: { email: user.email }
             };
-            database.collection("Links").onSnapshot(snapshot => {
-              let entries = [];
-              if (snapshot.size) {
-                snapshot.forEach(doc =>
-                  entries.push({ ...doc.data(), id: doc.id })
-                );
-                collection = { ...collection, entries: entries };
-                setData(collection);
-              }
-            });
+            database
+              .collection("Links")
+              .orderBy("date", "desc")
+              .onSnapshot(snapshot => {
+                let entries = [];
+                if (snapshot.size) {
+                  snapshot.forEach(doc =>
+                    entries.push({ ...doc.data(), id: doc.id })
+                  );
+                  collection = { ...collection, entries: entries };
+                  setData(collection);
+                }
+              });
           } else {
             collection = {
               signedIn: false

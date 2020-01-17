@@ -62,6 +62,15 @@ const Table = styled.table`
   text-align: left;
   width: 100%;
   border-collapse: collapse;
+  th {
+    border-right: 1px solid #e9eaeb;
+  }
+  th:last-child {
+    border-right: 0;
+  }
+  th:first-child {
+    max-width: 32px;
+  }
   td {
     border: 1px solid #e9eaeb;
   }
@@ -139,6 +148,9 @@ const Content = () => {
       <Table>
         <thead>
           <tr>
+            <th>
+              <input type="checkbox" />
+            </th>
             <th>Client</th>
             <th>Branch</th>
             <th>Type</th>
@@ -150,15 +162,20 @@ const Content = () => {
         <tbody>
           {searchResults.map(item => (
             <tr key={item.id}>
+              <td>
+                <input type="checkbox" />
+              </td>
               <td>{item.client}</td>
-              <td>Automotive</td>
-              <td>IAB Standard</td>
-              <td>Cross Device</td>
-              <td>01.01.1970</td>
+              <td>{item.branch}</td>
+              <td>{item.type}</td>
+              <td>{item.device}</td>
+              <td>{item.date}</td>
               <td>
                 <a href={item.url}>
-                  <StyledIcon icon={["fas", "external-link-alt"]} />
+                  <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
                 </a>
+                <StyledIcon icon={["fas", "cog"]} fixedWidth />
+                <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
               </td>
             </tr>
           ))}
