@@ -130,9 +130,13 @@ const Content = () => {
     setSearchResults(results);
   }, [searchTerm, data.entries]);
 
-  const test = id => {
+  const deleteItem = id => {
     console.log(id);
     firestoreDelete("Links", id);
+  };
+
+  const editItem = id => {
+    console.log(id);
   };
 
   return (
@@ -190,6 +194,18 @@ const Content = () => {
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
                 </a>
+                <Modal
+                  activator={({ setShow }) => (
+                    <ActionButton
+                      onClick={() => {
+                        setShow(true);
+                        editItem(item.id);
+                      }}
+                    >
+                      <StyledIcon icon={["fas", "cog"]} fixedWidth />
+                    </ActionButton>
+                  )}
+                />
                 <ActionButton
                   onClick={() => {
                     if (
@@ -197,19 +213,7 @@ const Content = () => {
                         "Are you sure you wish to delete this item?"
                       )
                     )
-                      test(item.id);
-                  }}
-                >
-                  <StyledIcon icon={["fas", "cog"]} fixedWidth />
-                </ActionButton>
-                <ActionButton
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Are you sure you wish to delete this item?"
-                      )
-                    )
-                      test(item.id);
+                      deleteItem(item.id);
                   }}
                 >
                   <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
