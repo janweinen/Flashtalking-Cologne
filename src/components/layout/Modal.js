@@ -57,7 +57,7 @@ const Input = styled.input`
   display: block;
 `;
 
-const Modal = ({ activator, item }) => {
+const Modal = ({ activator }) => {
   const [show, setShow] = useState(false);
   const submit = async event => {
     event.preventDefault();

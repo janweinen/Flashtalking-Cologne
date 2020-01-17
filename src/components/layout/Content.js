@@ -135,8 +135,12 @@ const Content = () => {
     firestoreDelete("Links", id);
   };
 
-  const editItem = id => {
+  const test = id => {
     console.log(id);
+  };
+
+  const blur = event => {
+    console.log(event.target);
   };
 
   return (
@@ -185,7 +189,16 @@ const Content = () => {
               <td>
                 <input type="checkbox" />
               </td>
-              <td>{item.client}</td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={blur}
+                onClick={() => {
+                  test(item);
+                }}
+              >
+                {item.client}
+              </td>
               <td>{item.branch}</td>
               <td>{item.type}</td>
               <td>{item.device}</td>
@@ -194,18 +207,6 @@ const Content = () => {
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
                 </a>
-                <Modal
-                  activator={({ setShow }) => (
-                    <ActionButton
-                      onClick={() => {
-                        setShow(true);
-                        editItem(item.id);
-                      }}
-                    >
-                      <StyledIcon icon={["fas", "cog"]} fixedWidth />
-                    </ActionButton>
-                  )}
-                />
                 <ActionButton
                   onClick={() => {
                     if (
