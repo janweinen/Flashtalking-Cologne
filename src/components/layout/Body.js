@@ -11,6 +11,7 @@ import {
   faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
+import Dropzone from "../Dropzone";
 
 library.add(faSearch, faPlusCircle, faExternalLinkAlt, faCog, faTrashAlt);
 
@@ -26,6 +27,7 @@ const Body = () => {
   return (
     <div style={style.body}>
       <Header />
+      <Dropzone />
       <Content />
     </div>
   );

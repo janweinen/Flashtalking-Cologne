@@ -37,15 +37,18 @@ export const logout = async event => {
 };
 
 export const firestoreAdd = async (collection, data) => {
-  console.log(collection, data);
   const store = await database.collection(collection);
   store.add(data);
 };
 
 export const firestoreDelete = async (collection, id) => {
-  console.log(collection, id);
   const store = await database.collection(collection);
   store.doc(id).delete();
+};
+
+export const firestoreUpdate = async (collection, doc, data) => {
+  const store = await database.collection(collection).doc(doc);
+  store.update(data);
 };
 /*
 export const firestoreRequest = async (collection, doc) => {

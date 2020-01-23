@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
 import styled from "styled-components";
-import { firestoreDelete } from "../Firebase";
+import { firestoreDelete, firestoreUpdate } from "../Firebase";
 
 const Main = styled.main`
   background-color: #ffffff;
@@ -131,16 +131,14 @@ const Content = () => {
   }, [searchTerm, data.entries]);
 
   const deleteItem = id => {
-    console.log(id);
     firestoreDelete("Links", id);
   };
 
-  const test = id => {
-    console.log(id);
-  };
-
-  const blur = event => {
-    console.log(event.target);
+  const updateItem = async (e, item) => {
+    await firestoreUpdate("Links", item.id, {
+      [e.target.id]: e.target.textContent,
+      date: new Date().toLocaleString()
+    });
   };
 
   return (
@@ -180,6 +178,7 @@ const Content = () => {
             <th>Type</th>
             <th>Device</th>
             <th>Date</th>
+            <th>Link</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -190,19 +189,56 @@ const Content = () => {
                 <input type="checkbox" />
               </td>
               <td
+                id="client"
                 contentEditable={true}
                 suppressContentEditableWarning={true}
-                onBlur={blur}
-                onClick={() => {
-                  test(item);
+                onBlur={e => {
+                  updateItem(e, item);
                 }}
               >
                 {item.client}
               </td>
-              <td>{item.branch}</td>
-              <td>{item.type}</td>
-              <td>{item.device}</td>
+              <td
+                id="branch"
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={e => {
+                  updateItem(e, item);
+                }}
+              >
+                {item.branch}
+              </td>
+              <td
+                id="type"
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={e => {
+                  updateItem(e, item);
+                }}
+              >
+                {item.type}
+              </td>
+              <td
+                id="device"
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={e => {
+                  updateItem(e, item);
+                }}
+              >
+                {item.device}
+              </td>
               <td>{item.date}</td>
+              <td
+                id="url"
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={e => {
+                  updateItem(e, item);
+                }}
+              >
+                {item.url}
+              </td>
               <td>
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
