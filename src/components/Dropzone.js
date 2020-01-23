@@ -1,31 +1,5 @@
 import React, { useRef } from "react";
 
-// Completely based on this answer:
-// http://stackoverflow.com/a/33917000
-// … and the according JSfiddle:
-// https://jsfiddle.net/oL2akhtz/
-//
-// Enhanced for my own purposes
-
-// https://codepen.io/nekobog/pen/JjoZvBm
-
-// var dropZone = document.getElementById("dropzone");
-
-// 1
-
-// 2
-//dropZone.addEventListener("dragenter", allowDrag);
-//dropZone.addEventListener("dragover", allowDrag);
-
-// 3
-/*dropZone.addEventListener("dragleave", function(e) {
-  console.log("dragleave");
-  hideDropZone();
-});*/
-
-// 4
-//dropZone.addEventListener("drop", handleDrop);
-
 const style = {
   boxSizing: "border-box",
   display: "none",
@@ -35,47 +9,60 @@ const style = {
   left: "0",
   top: "0",
   zIndex: "99999",
-
   background: "rgba(0,0,0, 0.3)",
   border: "11px dashed rgba(255,255,255, 0.3)"
 };
 
 const Dropzone = () => {
   const containerRef = useRef(null);
-  window.addEventListener("dragenter", function(e) {
+  const url = "process.php";
+  window.addEventListener("dragenter", event => {
     showDropZone();
   });
-  function allowDrag(e) {
+  const allowDrag = event => {
     if (true) {
-      // Test that the item being dragged is a valid one
-      e.dataTransfer.dropEffect = "copy";
-      e.preventDefault();
+      event.dataTransfer.dropEffect = "copy";
+      event.preventDefault();
     }
-  }
-  function handleDrop(e) {
-    e.preventDefault();
+  };
+  const handleDrop = event => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      formData.append("files[]", file);
+    }
+    fetch(url, {
+      method: "POST",
+      body: formData
+    }).then(response => {
+      console.log(response, files);
+    });
     hideDropZone();
-
-    alert("Drop!");
-  }
-  function showDropZone() {
+  };
+  const showDropZone = () => {
     containerRef.current.style.display = "block";
     console.log("on");
-  }
-  function hideDropZone() {
+  };
+  const hideDropZone = () => {
     containerRef.current.style.display = "none";
     console.log("off");
-  }
+  };
   return (
-    <div
-      id="dropzone"
-      ref={containerRef}
-      onDragEnter={allowDrag}
-      onDragOver={allowDrag}
-      onDragLeave={hideDropZone}
-      onDrop={handleDrop}
-      style={style}
-    />
+    <form method="post" encType="multipart/form-data">
+      <input
+        type="file"
+        name="files[]"
+        multiple
+        ref={containerRef}
+        onDragEnter={allowDrag}
+        onDragOver={allowDrag}
+        onDragLeave={hideDropZone}
+        onDrop={handleDrop}
+        style={style}
+      />
+    </form>
   );
 };
 

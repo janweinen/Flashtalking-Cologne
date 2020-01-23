@@ -4,7 +4,6 @@ import DataContext from "../Context";
 import Logo from "../../assets/images/FT-Logo@3x.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { upload } from "../Upload";
 
 const style = {
   header: {
@@ -59,17 +58,6 @@ const Header = () => {
           <img style={style.headerItem.image} src={Logo} alt="Logo" />
         </div>
         <h1 style={style.headerItem.productName}>cologne</h1>
-      </div>
-      <div style={style.headerItem}>
-        <form method="post" encType="multipart/form-data">
-          <input type="file" name="files[]" multiple />
-          <input
-            type="submit"
-            value="Upload File"
-            name="submit"
-            onClick={upload}
-          />
-        </form>
       </div>
       <div style={style.headerItem}>
         <div style={style.headerItem.user} onClick={logout}>
