@@ -135,10 +135,12 @@ const Content = () => {
   };
 
   const updateItem = async (e, item) => {
-    await firestoreUpdate("Links", item.id, {
-      [e.target.id]: e.target.textContent,
-      date: new Date().toLocaleString()
-    });
+    if (e.target.textContent !== item[e.target.id]) {
+      await firestoreUpdate("Links", item.id, {
+        [e.target.id]: e.target.textContent,
+        date: new Date().toLocaleString()
+      });
+    }
   };
 
   return (
