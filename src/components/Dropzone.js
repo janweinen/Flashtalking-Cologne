@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { firestoreAdd } from "./Firebase";
 
 const style = {
   boxSizing: "border-box",
@@ -25,13 +26,23 @@ const Dropzone = () => {
       event.preventDefault();
     }
   };
-  const handleDrop = event => {
+  const handleDrop = async event => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
       formData.append("files[]", file);
+      const data = {
+        client: "Flashtalking",
+        branch: "Link",
+        type: files[i].type,
+        device: "Cross Device",
+        url:
+          "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
+        date: new Date().toLocaleString()
+      };
+      await firestoreAdd("Links", data);
     }
     fetch(url, {
       method: "POST",
@@ -39,6 +50,7 @@ const Dropzone = () => {
     }).then(response => {
       console.log(response, files);
     });
+
     hideDropZone();
   };
   const showDropZone = () => {
