@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
 import styled from "styled-components";
-import { firestoreDelete, firestoreUpdate } from "../Firebase";
+import { firestoreDelete, firestoreUpdate, firestoreAdd } from "../Firebase";
 
 const Main = styled.main`
   background-color: #ffffff;
@@ -143,6 +143,18 @@ const Content = () => {
     }
   };
 
+  const test = async () => {
+    const data = {
+      client: "",
+      branch: "",
+      type: "",
+      device: "",
+      url: "",
+      date: new Date().toLocaleString()
+    };
+    await firestoreAdd("Links", data);
+  };
+
   return (
     <Main>
       <TableMenu>
@@ -162,7 +174,7 @@ const Content = () => {
           activator={({ setShow }) => (
             <NewEntryModule>
               <StyledIcon icon={["fas", "plus-circle"]} />
-              <button onClick={() => setShow(true)}>
+              <button onClick={test}>
                 <ButtonText>NEW ENTRY</ButtonText>
               </button>
             </NewEntryModule>
@@ -176,11 +188,12 @@ const Content = () => {
               <input type="checkbox" />
             </th>
             <th>Client</th>
-            <th>Branch</th>
             <th>Type</th>
+            <th>Branch</th>
+            <th>Format</th>
             <th>Device</th>
-            <th>Date</th>
             <th>Link</th>
+            <th>Date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -201,6 +214,16 @@ const Content = () => {
                 {item.client}
               </td>
               <td
+                id="type"
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onBlur={e => {
+                  updateItem(e, item);
+                }}
+              >
+                {item.type}
+              </td>
+              <td
                 id="branch"
                 contentEditable={true}
                 suppressContentEditableWarning={true}
@@ -211,14 +234,14 @@ const Content = () => {
                 {item.branch}
               </td>
               <td
-                id="type"
+                id="format"
                 contentEditable={true}
                 suppressContentEditableWarning={true}
                 onBlur={e => {
                   updateItem(e, item);
                 }}
               >
-                {item.type}
+                {item.format}
               </td>
               <td
                 id="device"
@@ -230,7 +253,6 @@ const Content = () => {
               >
                 {item.device}
               </td>
-              <td>{item.date}</td>
               <td
                 id="url"
                 contentEditable={true}
@@ -241,6 +263,7 @@ const Content = () => {
               >
                 {item.url}
               </td>
+              <td>{item.date}</td>
               <td>
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />

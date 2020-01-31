@@ -35,8 +35,9 @@ const Dropzone = () => {
       formData.append("files[]", file);
       const data = {
         client: "Flashtalking",
+        type: "Upload",
         branch: "Link",
-        type: files[i].type,
+        format: files[i].type,
         device: "Cross Device",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
