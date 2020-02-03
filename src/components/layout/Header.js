@@ -61,7 +61,7 @@ const style = {
 };
 
 const Header = () => {
-  const data = useContext(DataContext);
+  const dataContext = useContext(DataContext);
   return (
     <header style={style.header}>
       <div style={style.headerItem}>
@@ -73,7 +73,7 @@ const Header = () => {
       <div style={style.headerItem}>
         <div
           style={style.headerItem.button}
-          onClick={() => data.setContent.setContent("File")}
+          onClick={() => dataContext.setContent.setContent("File")}
         >
           <FontAwesomeIcon
             style={style.headerItem.buttonIcon}
@@ -83,7 +83,7 @@ const Header = () => {
         </div>
         <div
           style={style.headerItem.button}
-          onClick={() => data.setContent.setContent("Demo")}
+          onClick={() => dataContext.setContent.setContent("Demo")}
         >
           <FontAwesomeIcon
             style={style.headerItem.buttonIcon}
@@ -92,7 +92,7 @@ const Header = () => {
           Demos
         </div>
         <div style={style.headerItem.button} onClick={logout}>
-          {data.user.email}
+          {dataContext.user.email}
           <FontAwesomeIcon
             style={style.headerItem.userIcon}
             icon={faUserCircle}

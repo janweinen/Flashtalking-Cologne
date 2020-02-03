@@ -116,18 +116,18 @@ const ActionButton = styled.button`
 `;
 
 const Content = () => {
-  const data = useContext(DataContext);
+  const dataContext = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
-    const results = data.entries.filter(item =>
+    const results = dataContext.entries.filter(item =>
       Object.keys(item).some(key => item[key].includes(searchTerm))
     );
     setSearchResults(results);
-  }, [searchTerm, data.entries]);
+  }, [searchTerm, dataContext.entries]);
 
   const deleteItem = id => {
     firestoreDelete("Links", id);
@@ -143,6 +143,7 @@ const Content = () => {
   };
 
   const test = async () => {
+    dataContext.setContent.setContent("Demo");
     const data = {
       client: "",
       branch: "",
