@@ -41,7 +41,7 @@ const Dropzone = () => {
         device: "N/A",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
-        date: new Date().getTime(),
+        date: new Date().getTime().toString(),
         created: new Date().toLocaleString()
       };
       await firestoreAdd("Links", data);
