@@ -149,7 +149,7 @@ const Content = () => {
       type: "Demo",
       device: "",
       url: "",
-      date: new Date().getTime(),
+      date: new Date().getTime().toString(),
       created: new Date().toLocaleString()
     };
     await firestoreAdd("Links", data);
