@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
@@ -117,12 +117,11 @@ const ActionButton = styled.button`
 
 const Content = () => {
   const data = useContext(DataContext);
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
-
   useEffect(() => {
     const results = data.entries.filter(item =>
       Object.keys(item).some(key => item[key].includes(searchTerm))
@@ -138,7 +137,7 @@ const Content = () => {
     if (e.target.textContent !== item[e.target.id]) {
       await firestoreUpdate("Links", item.id, {
         [e.target.id]: e.target.textContent,
-        date: new Date().toLocaleString()
+        created: new Date().toLocaleString()
       });
     }
   };
@@ -147,10 +146,11 @@ const Content = () => {
     const data = {
       client: "",
       branch: "",
-      type: "",
+      type: "Demo",
       device: "",
       url: "",
-      date: new Date().toLocaleString()
+      date: new Date().getTime(),
+      created: new Date().toLocaleString()
     };
     await firestoreAdd("Links", data);
   };
@@ -175,7 +175,7 @@ const Content = () => {
             <NewEntryModule>
               <StyledIcon icon={["fas", "plus-circle"]} />
               <button onClick={test}>
-                <ButtonText>NEW ENTRY</ButtonText>
+                <ButtonText>NEW DEMOLINK</ButtonText>
               </button>
             </NewEntryModule>
           )}
@@ -188,12 +188,11 @@ const Content = () => {
               <input type="checkbox" />
             </th>
             <th>Client</th>
-            <th>Type</th>
             <th>Branch</th>
             <th>Format</th>
             <th>Device</th>
             <th>Link</th>
-            <th>Date</th>
+            <th>Last Changed</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -212,16 +211,6 @@ const Content = () => {
                 }}
               >
                 {item.client}
-              </td>
-              <td
-                id="type"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.type}
               </td>
               <td
                 id="branch"
@@ -263,7 +252,7 @@ const Content = () => {
               >
                 {item.url}
               </td>
-              <td>{item.date}</td>
+              <td>{item.created}</td>
               <td>
                 <a href={item.url}>
                   <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />

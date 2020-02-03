@@ -35,13 +35,14 @@ const Dropzone = () => {
       formData.append("files[]", file);
       const data = {
         client: "Flashtalking",
-        type: "Upload",
+        type: "File",
         branch: "Link",
         format: files[i].type,
-        device: "Cross Device",
+        device: "N/A",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
-        date: new Date().toLocaleString()
+        date: new Date().getTime(),
+        created: new Date().toLocaleString()
       };
       await firestoreAdd("Links", data);
     }

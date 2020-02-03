@@ -9,6 +9,7 @@ import "./styles.css";
 
 const App = () => {
   const [data, setData] = useState({});
+  const [content, setContent] = useState("File");
   useEffect(() => {
     let collection = {};
     async function init() {
@@ -19,8 +20,10 @@ const App = () => {
               signedIn: true,
               user: { email: user.email }
             };
+            // unscubscribe???
             database
               .collection("Links")
+              .where("type", "==", content)
               .orderBy("date", "desc")
               .onSnapshot(snapshot => {
                 let entries = [];
@@ -28,7 +31,11 @@ const App = () => {
                   snapshot.forEach(doc =>
                     entries.push({ ...doc.data(), id: doc.id })
                   );
-                  collection = { ...collection, entries: entries };
+                  collection = {
+                    ...collection,
+                    entries: entries,
+                    setContent: { setContent }
+                  };
                   setData(collection);
                 }
               });
@@ -44,7 +51,7 @@ const App = () => {
       }
     }
     init();
-  }, []);
+  }, [content]);
 
   return (
     <DataProvider value={data}>
