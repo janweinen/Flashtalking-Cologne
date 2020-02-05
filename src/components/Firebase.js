@@ -50,6 +50,22 @@ export const firestoreUpdate = async (collection, doc, data) => {
   const store = await database.collection(collection).doc(doc);
   store.update(data);
 };
+
+export const store = async (collection, doc, data) => {
+  const storage = await database.collection(collection).doc(doc);
+  const snapshot = await storage.get();
+  if (snapshot.exists) {
+    if (window.confirm("Are you sure you wish to update this item?")) {
+      storage.update(data);
+      console.log("update");
+    }
+  } else {
+    await database
+      .collection(collection)
+      .doc(doc)
+      .set(data);
+  }
+};
 /*
 export const firestoreRequest = async (collection, doc) => {
   const request = await database.collection(collection).doc(doc);

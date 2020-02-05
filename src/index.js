@@ -12,7 +12,7 @@ const App = () => {
   const [content, setContent] = useState("File");
   useEffect(() => {
     let collection = {};
-    async function init() {
+    const init = async () => {
       try {
         await auth.onAuthStateChanged(user => {
           if (user) {
@@ -21,6 +21,7 @@ const App = () => {
               user: { email: user.email }
             };
             // unscubscribe???
+            // hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)
             database
               .collection("Links")
               .where("type", "==", content)
@@ -49,7 +50,7 @@ const App = () => {
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     init();
   }, [content]);
 

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { firestoreAdd } from "./Firebase";
+import { firestoreAdd, store } from "./Firebase";
 
 const style = {
   boxSizing: "border-box",
@@ -14,10 +14,16 @@ const style = {
   border: "11px dashed rgba(255,255,255, 0.3)"
 };
 
+const hashCode = s =>
+  s.split("").reduce((a, b) => {
+    a = (a << 5) - a + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+
 const Dropzone = () => {
   const containerRef = useRef(null);
   const url = "process.php";
-  window.addEventListener("dragenter", event => {
+  window.addEventListener("dragenter", () => {
     showDropZone();
   });
   const allowDrag = event => {
@@ -37,14 +43,25 @@ const Dropzone = () => {
         client: "Flashtalking",
         type: "File",
         branch: "Link",
-        format: files[i].type,
+        format: "",
         device: "N/A",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
         date: new Date().getTime().toString(),
         created: new Date().toLocaleString()
       };
-      await firestoreAdd("Links", data);
+      switch (true) {
+        case files[i].type.indexOf("presentation") !== -1:
+          data.format = "pptx";
+          break;
+        case files[i].type.indexOf("document") !== -1:
+          data.format = "docx";
+          break;
+        default:
+          data.format = files[i].type;
+          break;
+      }
+      await store("Links", hashCode(files[i].name).toString(), data);
     }
     fetch(url, {
       method: "POST",
@@ -52,7 +69,6 @@ const Dropzone = () => {
     }).then(response => {
       console.log(response, files);
     });
-
     hideDropZone();
   };
   const showDropZone = () => {

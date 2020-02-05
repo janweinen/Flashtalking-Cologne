@@ -119,14 +119,19 @@ const Content = () => {
   const dataContext = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
-    const results = dataContext.entries.filter(item =>
-      Object.keys(item).some(key => item[key].includes(searchTerm))
-    );
-    setSearchResults(results);
+    const init = async () => {
+      const results = await dataContext.entries.filter(item =>
+        Object.keys(item).some(key => item[key].includes(searchTerm))
+      );
+      setSearchResults(results);
+      setLoading(false);
+    };
+    init();
   }, [searchTerm, dataContext.entries]);
 
   const deleteItem = id => {
@@ -171,6 +176,7 @@ const Content = () => {
             />
           </form>
         </SearchModule>
+        {/*
         <Modal
           activator={({ setShow }) => (
             <NewEntryModule>
@@ -181,6 +187,7 @@ const Content = () => {
             </NewEntryModule>
           )}
         />
+        */}
       </TableMenu>
       <Table>
         <thead>
