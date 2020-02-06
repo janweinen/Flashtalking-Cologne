@@ -111,10 +111,6 @@ const Table = styled.table`
     text-align: right;
   }
 
-  thead {
-    /* fallback */
-  }
-
   tbody td,
   thead th {
     font-size: 12px;
@@ -226,99 +222,104 @@ const Content = () => {
         />
         */}
       </TableMenu>
-      <Table>
-        <thead>
-          <tr>
-            <th>
-              <input type="checkbox" />
-            </th>
-            <th>Client</th>
-            <th>Branch</th>
-            <th>Format</th>
-            <th>Device</th>
-            <th>Link</th>
-            <th>Last Changed</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchResults.map(item => (
-            <tr key={item.id}>
-              <td>
+      <div id="table-scroll" className="table-scroll">
+        <table id="main-table" className="main-table">
+          <thead>
+            <tr>
+              <th>
                 <input type="checkbox" />
-              </td>
-              <td
-                id="client"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.client}
-              </td>
-              <td
-                id="branch"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.branch}
-              </td>
-              <td
-                id="format"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.format}
-              </td>
-              <td
-                id="device"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.device}
-              </td>
-              <td
-                id="url"
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onBlur={e => {
-                  updateItem(e, item);
-                }}
-              >
-                {item.url}
-              </td>
-              <td>{item.created}</td>
-              <td>
-                <a href={item.url}>
-                  <StyledIcon icon={["fas", "external-link-alt"]} fixedWidth />
-                </a>
-                <ActionButton
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Are you sure you wish to delete this item?"
-                      )
-                    )
-                      deleteItem(item);
+              </th>
+              <th>Client</th>
+              <th>Branch</th>
+              <th>Format</th>
+              <th>Device</th>
+              <th>Link</th>
+              <th>Last Changed</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {searchResults.map(item => (
+              <tr key={item.id}>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <td
+                  id="client"
+                  contentEditable={true}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
                   }}
                 >
-                  <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
-                </ActionButton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+                  {item.client}
+                </td>
+                <td
+                  id="branch"
+                  contentEditable={true}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
+                  }}
+                >
+                  {item.branch}
+                </td>
+                <td
+                  id="format"
+                  contentEditable={true}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
+                  }}
+                >
+                  {item.format}
+                </td>
+                <td
+                  id="device"
+                  contentEditable={true}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
+                  }}
+                >
+                  {item.device}
+                </td>
+                <td
+                  id="url"
+                  contentEditable={true}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
+                  }}
+                >
+                  {item.url}
+                </td>
+                <td>{item.created}</td>
+                <td>
+                  <a href={item.url}>
+                    <StyledIcon
+                      icon={["fas", "external-link-alt"]}
+                      fixedWidth
+                    />
+                  </a>
+                  <ActionButton
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Are you sure you wish to delete this item?"
+                        )
+                      )
+                        deleteItem(item);
+                    }}
+                  >
+                    <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />
+                  </ActionButton>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Main>
   );
 };
