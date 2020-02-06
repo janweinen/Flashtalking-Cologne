@@ -21,7 +21,6 @@ const App = () => {
               user: { email: user.email }
             };
             // unscubscribe???
-            // hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)
             database
               .collection("Links")
               .where("type", "==", content)

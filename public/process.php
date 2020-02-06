@@ -17,11 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		$file = $path . $file_name;
 
-		if( file_exists( "upload/$file_name" ) )
-			echo "YES";
-		else
-			echo "NO";
-
 		if (!in_array($file_ext, $extensions)) {
 			$errors[] = 'Extension not allowed: ' . $file_name . ' ' . $file_type;
 		}

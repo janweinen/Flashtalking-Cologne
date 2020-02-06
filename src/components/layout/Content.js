@@ -60,47 +60,76 @@ const StyledIcon = styled(FontAwesomeIcon)`
 `;
 
 const Table = styled.table`
-  text-align: left;
   width: 100%;
   border-collapse: collapse;
+
+  thead,
+  tbody,
+  tr,
+  td,
   th {
-    border-right: 1px solid #e9eaeb;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  th:last-child {
-    border-right: 0;
+
+  tr:after {
+    content: " ";
+    display: block;
+    visibility: hidden;
+    clear: both;
   }
-  th:first-child {
-    max-width: 32px;
-  }
-  td {
-    border: 1px solid #e9eaeb;
-  }
-  tr:first-child td {
-    border-top: 0;
-  }
-  tr td:first-child {
-    border-left: 0;
-  }
-  tr:last-child td {
-    border-bottom: 0;
-  }
-  tr td:last-child {
-    border-right: 0;
-  }
-  th,
-  td {
-    font-size: 12px;
+
+  td,
+  th {
     padding: 10px;
   }
-  thead {
-    border-bottom: 1px solid #e9eaeb;
+
+  thead th {
+    text-align: left;
   }
+
+  tbody {
+    height: calc(100vh - 200px);
+
+    overflow-y: auto;
+  }
+
+  th:first-child {
+    width: 20px;
+  }
+
+  td:first-child {
+    width: 20px;
+  }
+
+  th:last-child {
+    width: 20px;
+  }
+
+  td:last-child {
+    width: 20px;
+  }
+
+  thead {
+    /* fallback */
+  }
+
+  tbody td,
+  thead th {
+    font-size: 12px;
+    width: 10%;
+    float: left;
+  }
+
   tr:hover {
     background-color: #d5eafa;
   }
+
   tr:hover:nth-child(even) {
     background-color: #d5eafa;
   }
+
   tr:nth-child(even) {
     background-color: #f8f9fa;
   }
@@ -134,8 +163,16 @@ const Content = () => {
     init();
   }, [searchTerm, dataContext.entries]);
 
-  const deleteItem = id => {
-    firestoreDelete("Links", id);
+  const deleteItem = item => {
+    firestoreDelete("Links", item.id);
+    fetch("delete.php", {
+      method: "POST",
+      data: {
+        file: "upload/" + item.name
+      }
+    }).then(response => {
+      console.log(response, item.name);
+    });
   };
 
   const updateItem = async (e, item) => {
@@ -272,7 +309,7 @@ const Content = () => {
                         "Are you sure you wish to delete this item?"
                       )
                     )
-                      deleteItem(item.id);
+                      deleteItem(item);
                   }}
                 >
                   <StyledIcon icon={["fas", "trash-alt"]} fixedWidth />

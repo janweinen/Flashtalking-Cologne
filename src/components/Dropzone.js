@@ -1,18 +1,29 @@
 import React, { useRef } from "react";
 import { firestoreAdd, store } from "./Firebase";
+import styled from "styled-components";
 
-const style = {
-  boxSizing: "border-box",
-  display: "none",
-  position: "fixed",
-  width: "100%",
-  height: "100%",
-  left: "0",
-  top: "0",
-  zIndex: "99999",
-  background: "rgba(0,0,0, 0.3)",
-  border: "11px dashed rgba(255,255,255, 0.3)"
-};
+const DropzoneContainer = styled.div`
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.3);
+  border: 11px dashed rgba(255, 255, 255, 0.3);
+`;
+
+const Input = styled.input`
+  opacity: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100000;
+`;
 
 const hashCode = s =>
   s.split("").reduce((a, b) => {
@@ -42,6 +53,7 @@ const Dropzone = () => {
       const data = {
         client: "Flashtalking",
         type: "File",
+        name: files[i].name,
         branch: "Link",
         format: "",
         device: "N/A",
@@ -80,19 +92,18 @@ const Dropzone = () => {
     console.log("off");
   };
   return (
-    <form method="post" encType="multipart/form-data">
-      <input
-        type="file"
-        name="files[]"
-        multiple
-        ref={containerRef}
-        onDragEnter={allowDrag}
-        onDragOver={allowDrag}
-        onDragLeave={hideDropZone}
-        onDrop={handleDrop}
-        style={style}
-      />
-    </form>
+    <DropzoneContainer ref={containerRef} onDragLeave={hideDropZone}>
+      <form method="post" encType="multipart/form-data">
+        <Input
+          type="file"
+          name="files[]"
+          multiple
+          onDragEnter={allowDrag}
+          onDragOver={allowDrag}
+          onDrop={handleDrop}
+        />
+      </form>
+    </DropzoneContainer>
   );
 };
 
