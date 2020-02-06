@@ -90,7 +90,7 @@ const Table = styled.table`
   }
 
   tbody {
-    height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
 
     overflow-y: auto;
   }
@@ -104,11 +104,11 @@ const Table = styled.table`
   }
 
   th:last-child {
-    width: 20px;
+    text-align: right;
   }
 
   td:last-child {
-    width: 20px;
+    text-align: right;
   }
 
   thead {
@@ -118,7 +118,7 @@ const Table = styled.table`
   tbody td,
   thead th {
     font-size: 12px;
-    width: 10%;
+    width: 12.5%;
     float: left;
   }
 
