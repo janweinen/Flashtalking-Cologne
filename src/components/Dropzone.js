@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { firestoreAdd, store } from "./Firebase";
 import styled from "styled-components";
 
@@ -32,6 +32,7 @@ const hashCode = s =>
   }, 0);
 
 const Dropzone = () => {
+  const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
   const url = "process.php";
   window.addEventListener("dragenter", () => {
@@ -44,6 +45,7 @@ const Dropzone = () => {
     }
   };
   const handleDrop = async event => {
+    setLoading(true);
     event.preventDefault();
     const files = event.dataTransfer.files;
     const formData = new FormData();
@@ -75,13 +77,12 @@ const Dropzone = () => {
       }
       await store("Links", hashCode(files[i].name).toString(), data);
     }
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       body: formData
-    }).then(response => {
-      console.log(response, files);
     });
     hideDropZone();
+    setLoading(false);
   };
   const showDropZone = () => {
     containerRef.current.style.display = "block";
@@ -93,6 +94,7 @@ const Dropzone = () => {
   };
   return (
     <DropzoneContainer ref={containerRef} onDragLeave={hideDropZone}>
+      {loading ? <div style={{ color: "#ffffff" }}>LOADING</div> : <div />}
       <form method="post" encType="multipart/form-data">
         <Input
           type="file"

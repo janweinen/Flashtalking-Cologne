@@ -125,7 +125,8 @@ const Table = styled.table`
   }
 
   td:focus {
-    background: #d5eafa;
+    background: #374047;
+    color: #ffffff;
     outline: none;
   }
 
