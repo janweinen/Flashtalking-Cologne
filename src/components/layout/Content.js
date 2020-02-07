@@ -59,73 +59,82 @@ const StyledIcon = styled(FontAwesomeIcon)`
   vertical-align: middle;
 `;
 
+const TableContainer = styled.div`
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin: auto;
+  overflow: auto;
+  max-height: calc(100vh - 162px);
+`;
+
 const Table = styled.table`
   width: 100%;
+  min-width: 1280px;
+  margin: auto;
   border-collapse: collapse;
 
-  thead,
-  tbody,
-  tr,
-  td,
   th {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
+    border-right: 1px solid #e9eaeb;
+  }
+  th:last-child {
+    border-right: 0;
+  }
+  td {
+    border: 1px solid #e9eaeb;
+  }
+  tr:first-child td {
+    border-top: 0;
+  }
+  tr td:first-child {
+    border-left: 0;
+  }
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  tr td:last-child {
+    border-right: 0;
   }
 
-  tr:after {
-    content: " ";
-    display: block;
-    visibility: hidden;
-    clear: both;
-  }
-
-  td,
-  th {
+  th,
+  td {
     padding: 10px;
+    font-size: 12px;
+    vertical-align: top;
   }
 
   thead th {
     text-align: left;
+    background-color: #ffffff;
+    color: #000000;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #e9eaeb;
+  }
+  /* safari and ios need the tfoot itself to be position:sticky also */
+  tfoot,
+  tfoot th,
+  tfoot td {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    background: #666;
+    color: #fff;
+    z-index: 4;
   }
 
-  tbody {
-    max-height: calc(100vh - 200px);
-
-    overflow-y: auto;
-  }
-
-  th:first-child {
-    width: 20px;
-  }
-
-  td:first-child {
-    width: 20px;
-  }
-
-  th:last-child {
-    text-align: right;
-  }
-
-  td:last-child {
-    text-align: right;
-  }
-
-  tbody td,
-  thead th {
-    font-size: 12px;
-    width: 12.5%;
-    float: left;
+  td:focus {
+    background: #d5eafa;
+    outline: none;
   }
 
   tr:hover {
     background-color: #d5eafa;
   }
-
   tr:hover:nth-child(even) {
     background-color: #d5eafa;
   }
-
   tr:nth-child(even) {
     background-color: #f8f9fa;
   }
@@ -222,8 +231,8 @@ const Content = () => {
         />
         */}
       </TableMenu>
-      <div id="table-scroll" className="table-scroll">
-        <table id="main-table" className="main-table">
+      <TableContainer>
+        <Table>
           <thead>
             <tr>
               <th>
@@ -318,8 +327,8 @@ const Content = () => {
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+        </Table>
+      </TableContainer>
     </Main>
   );
 };
