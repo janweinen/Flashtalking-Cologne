@@ -52,7 +52,7 @@ export const firestoreUpdate = async (collection, doc, data) => {
 };
 
 export const store = async (collection, doc, data) => {
-  const storage = await database.collection(collection).doc(doc);
+  const storage = database.collection(collection).doc(doc);
   const snapshot = await storage.get();
   if (snapshot.exists) {
     if (window.confirm("Are you sure you wish to update this item?")) {

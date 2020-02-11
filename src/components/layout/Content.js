@@ -170,7 +170,7 @@ const Content = () => {
   }, [searchTerm, dataContext.entries]);
 
   const deleteItem = item => {
-    firestoreDelete("Links", item.id);
+    firestoreDelete("Data", item.id);
     fetch("delete.php", {
       method: "POST",
       data: {
@@ -240,10 +240,10 @@ const Content = () => {
                 <input type="checkbox" />
               </th>
               <th>Client</th>
-              <th>Branch</th>
+              <th>Category</th>
               <th>Format</th>
               <th>Device</th>
-              <th>Link</th>
+              <th>URL</th>
               <th>Last Changed</th>
               <th>Actions</th>
             </tr>
@@ -256,7 +256,7 @@ const Content = () => {
                 </td>
                 <td
                   id="client"
-                  contentEditable={true}
+                  contentEditable={item.contentEditable.client}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -265,18 +265,18 @@ const Content = () => {
                   {item.client}
                 </td>
                 <td
-                  id="branch"
-                  contentEditable={true}
+                  id="category"
+                  contentEditable={item.contentEditable.category}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
                   }}
                 >
-                  {item.branch}
+                  {item.category}
                 </td>
                 <td
                   id="format"
-                  contentEditable={true}
+                  contentEditable={item.contentEditable.format}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -286,7 +286,7 @@ const Content = () => {
                 </td>
                 <td
                   id="device"
-                  contentEditable={true}
+                  contentEditable={item.contentEditable.device}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -296,7 +296,7 @@ const Content = () => {
                 </td>
                 <td
                   id="url"
-                  contentEditable={true}
+                  contentEditable={item.contentEditable.url}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -304,7 +304,7 @@ const Content = () => {
                 >
                   {item.url}
                 </td>
-                <td>{item.created}</td>
+                <td>{item.lastChanged}</td>
                 <td>
                   <a href={item.url}>
                     <StyledIcon

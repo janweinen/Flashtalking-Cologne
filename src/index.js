@@ -9,50 +9,49 @@ import "./styles.css";
 
 const App = () => {
   const [data, setData] = useState({});
-  const [content, setContent] = useState("File");
+  const [content, setContent] = useState("Upload");
   useEffect(() => {
     let collection = {};
-    const init = async () => {
-      try {
-        await auth.onAuthStateChanged(user => {
-          if (user) {
-            collection = {
-              signedIn: true,
-              user: { email: user.email }
-            };
-            // unscubscribe???
-            database
-              .collection("Links")
-              .where("type", "==", content)
-              .orderBy("date", "desc")
-              .onSnapshot(snapshot => {
-                let entries = [];
-                if (snapshot.size) {
-                  snapshot.forEach(doc =>
-                    entries.push({ ...doc.data(), id: doc.id })
-                  );
-                  collection = {
-                    ...collection,
-                    entries: entries,
-                    setContent: { setContent }
-                  };
-                  setData(collection);
-                }
-              });
-          } else {
-            collection = {
-              signedIn: false
-            };
-            setData(collection);
-          }
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    init();
+    try {
+      auth.onAuthStateChanged(user => {
+        console.log(user.email);
+        if (user) {
+          collection = {
+            signedIn: true,
+            user: { email: user.email }
+          };
+          // unscubscribe???
+          console.log(collection.signedIn);
+          database
+            .collection("Data")
+            .where("category", "==", content)
+            .orderBy("timestamp", "desc")
+            .onSnapshot(snapshot => {
+              let entries = [];
+              if (snapshot.size) {
+                snapshot.forEach(doc =>
+                  entries.push({ ...doc.data(), id: doc.id })
+                );
+                collection = {
+                  ...collection,
+                  entries: entries,
+                  setContent: { setContent }
+                };
+                setData(collection);
+              }
+            });
+        } else {
+          collection = {
+            signedIn: false
+          };
+          setData(collection);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, [content]);
-
+  console.log(data);
   return (
     <DataProvider value={data}>
       <div>{data.signedIn ? <Body /> : <Login />}</div>

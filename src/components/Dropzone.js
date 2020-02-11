@@ -54,15 +54,21 @@ const Dropzone = () => {
       formData.append("files[]", file);
       const data = {
         client: "Flashtalking",
-        type: "File",
-        name: files[i].name,
-        branch: "Link",
+        category: "Upload",
         format: "",
         device: "N/A",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
-        date: new Date().getTime().toString(),
-        created: new Date().toLocaleString()
+        lastChanged: new Date().toLocaleString(),
+        timestamp: new Date().getTime().toString(),
+        name: files[i].name,
+        contentEditable: {
+          client: true,
+          category: false,
+          format: false,
+          device: true,
+          url: false
+        }
       };
       switch (true) {
         case files[i].type.indexOf("presentation") !== -1:
@@ -75,7 +81,7 @@ const Dropzone = () => {
           data.format = files[i].type;
           break;
       }
-      await store("Links", hashCode(files[i].name).toString(), data);
+      await store("Data", hashCode(files[i].name).toString(), data);
     }
     await fetch(url, {
       method: "POST",
