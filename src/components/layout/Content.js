@@ -3,7 +3,12 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
 import styled from "styled-components";
-import { firestoreDelete, firestoreUpdate, firestoreAdd } from "../Firebase";
+import {
+  firestoreDelete,
+  firestoreUpdate,
+  firestoreAdd,
+  store
+} from "../Firebase";
 
 const Main = styled.main`
   background-color: #ffffff;
@@ -183,9 +188,9 @@ const Content = () => {
 
   const updateItem = async (e, item) => {
     if (e.target.textContent !== item[e.target.id]) {
-      await firestoreUpdate("Links", item.id, {
+      await store("Data", item.id, {
         [e.target.id]: e.target.textContent,
-        created: new Date().toLocaleString()
+        lastChanged: new Date().toLocaleString()
       });
     }
   };
@@ -194,14 +199,22 @@ const Content = () => {
     dataContext.setContent.setContent("Demo");
     const data = {
       client: "",
-      branch: "",
-      type: "Demo",
+      category: "Demo",
+      format: "",
       device: "",
       url: "",
-      date: new Date().getTime().toString(),
-      created: new Date().toLocaleString()
+      lastChanged: new Date().toLocaleString(),
+      timestamp: new Date().getTime().toString(),
+      name: "",
+      contentEditable: {
+        client: true,
+        category: false,
+        format: true,
+        device: true,
+        url: true
+      }
     };
-    await firestoreAdd("Links", data);
+    await store("Data", data.timestamp, data);
   };
 
   return (
@@ -219,6 +232,12 @@ const Content = () => {
             />
           </form>
         </SearchModule>
+        <NewEntryModule>
+          <StyledIcon icon={["fas", "plus-circle"]} />
+          <button onClick={test}>
+            <ButtonText>NEW DEMOLINK</ButtonText>
+          </button>
+        </NewEntryModule>
         {/*
         <Modal
           activator={({ setShow }) => (

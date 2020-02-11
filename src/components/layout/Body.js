@@ -8,12 +8,20 @@ import {
   faPlusCircle,
   faExternalLinkAlt,
   faCog,
-  faTrashAlt
+  faTrashAlt,
+  faSync
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import Dropzone from "../Dropzone";
 
-library.add(faSearch, faPlusCircle, faExternalLinkAlt, faCog, faTrashAlt);
+library.add(
+  faSearch,
+  faPlusCircle,
+  faExternalLinkAlt,
+  faCog,
+  faTrashAlt,
+  faSync
+);
 
 const style = {
   body: {

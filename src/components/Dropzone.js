@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { firestoreAdd, store } from "./Firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 const DropzoneContainer = styled.div`
@@ -23,6 +24,17 @@ const Input = styled.input`
   left: 0;
   top: 0;
   z-index: 100000;
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  color: #ffffff;
+  font-size: 10vw;
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -5vw;
+  margin-top: -5vw;
 `;
 
 const hashCode = s =>
@@ -100,7 +112,13 @@ const Dropzone = () => {
   };
   return (
     <DropzoneContainer ref={containerRef} onDragLeave={hideDropZone}>
-      {loading ? <div style={{ color: "#ffffff" }}>LOADING</div> : <div />}
+      {loading ? (
+        <div style={{ color: "#ffffff" }}>
+          <StyledIcon icon={["fas", "sync"]} spin />
+        </div>
+      ) : (
+        <div />
+      )}
       <form method="post" encType="multipart/form-data">
         <Input
           type="file"

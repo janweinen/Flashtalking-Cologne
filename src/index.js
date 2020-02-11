@@ -14,14 +14,12 @@ const App = () => {
     let collection = {};
     try {
       auth.onAuthStateChanged(user => {
-        console.log(user.email);
         if (user) {
           collection = {
             signedIn: true,
             user: { email: user.email }
           };
           // unscubscribe???
-          console.log(collection.signedIn);
           database
             .collection("Data")
             .where("category", "==", content)
@@ -51,7 +49,6 @@ const App = () => {
       console.log(error);
     }
   }, [content]);
-  console.log(data);
   return (
     <DataProvider value={data}>
       <div>{data.signedIn ? <Body /> : <Login />}</div>

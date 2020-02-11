@@ -39,10 +39,10 @@ const style = {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      //borderRight: "1px solid #4a5258",
+      borderRight: "1px solid #4a5258",
       height: "100%",
       marginRight: "20px",
-      //paddingRight: "20px",
+      paddingRight: "20px",
       fontSize: "12px",
       cursor: "pointer",
       color: "#aeb2b5"
@@ -71,10 +71,9 @@ const Header = () => {
         <h1 style={style.headerItem.productName}>cologne</h1>
       </div>
       <div style={style.headerItem}>
-        {/*
         <div
           style={style.headerItem.button}
-          onClick={() => dataContext.setContent.setContent("File")}
+          onClick={() => dataContext.setContent.setContent("Upload")}
         >
           <FontAwesomeIcon
             style={style.headerItem.buttonIcon}
@@ -82,7 +81,6 @@ const Header = () => {
           />
           Files
         </div>
-        
         <div
           style={style.headerItem.button}
           onClick={() => dataContext.setContent.setContent("Demo")}
@@ -93,7 +91,6 @@ const Header = () => {
           />
           Demos
         </div>
-        */}
         <div style={style.headerItem.button} onClick={logout}>
           {dataContext.user.email}
           <FontAwesomeIcon

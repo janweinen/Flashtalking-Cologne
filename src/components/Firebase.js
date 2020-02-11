@@ -56,6 +56,7 @@ export const store = async (collection, doc, data) => {
   const snapshot = await storage.get();
   if (snapshot.exists) {
     if (window.confirm("Are you sure you wish to update this item?")) {
+      delete data.timestamp;
       storage.update(data);
       console.log("update");
     }
