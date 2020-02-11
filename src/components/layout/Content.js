@@ -259,7 +259,7 @@ const Content = () => {
                 <input type="checkbox" />
               </th>
               <th>Client</th>
-              <th>Category</th>
+              {/*<th>Category</th>*/}
               <th>Format</th>
               <th>Device</th>
               <th>URL</th>
@@ -283,6 +283,7 @@ const Content = () => {
                 >
                   {item.client}
                 </td>
+                {/*
                 <td
                   id="category"
                   contentEditable={item.contentEditable.category}
@@ -293,6 +294,7 @@ const Content = () => {
                 >
                   {item.category}
                 </td>
+                */}
                 <td
                   id="format"
                   contentEditable={item.contentEditable.format}
