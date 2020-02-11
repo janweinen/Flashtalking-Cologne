@@ -55,10 +55,14 @@ export const store = async (collection, doc, data) => {
   const storage = database.collection(collection).doc(doc);
   const snapshot = await storage.get();
   if (snapshot.exists) {
-    if (window.confirm("Are you sure you wish to update this item?")) {
+    if (data.category === "Upload") {
+      if (window.confirm("Are you sure you wish to update this item?")) {
+        delete data.timestamp;
+        storage.update(data);
+      }
+    } else {
       delete data.timestamp;
       storage.update(data);
-      console.log("update");
     }
   } else {
     await database

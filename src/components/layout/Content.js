@@ -208,7 +208,6 @@ const Content = () => {
       name: "",
       contentEditable: {
         client: true,
-        category: false,
         format: true,
         device: true,
         url: true

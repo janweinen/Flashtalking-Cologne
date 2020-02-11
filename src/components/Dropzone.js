@@ -75,10 +75,9 @@ const Dropzone = () => {
         timestamp: new Date().getTime().toString(),
         name: files[i].name,
         contentEditable: {
-          client: true,
-          category: false,
+          client: false,
           format: false,
-          device: true,
+          device: false,
           url: false
         }
       };
