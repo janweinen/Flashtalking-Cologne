@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
-import { firestoreAdd, store } from "./Firebase";
+import React, { useRef, useState, useContext } from "react";
+import { store } from "./Firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import DataContext from "./Context";
 
 const DropzoneContainer = styled.div`
   box-sizing: border-box;
@@ -44,6 +45,7 @@ const hashCode = s =>
   }, 0);
 
 const Dropzone = () => {
+  const dataContext = useContext(DataContext);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef(null);
   const url = "process.php";
@@ -93,6 +95,7 @@ const Dropzone = () => {
           break;
       }
       await store("Data", hashCode(files[i].name).toString(), data, "dropzone");
+      dataContext.setContent.setContent("Upload");
     }
     await fetch(url, {
       method: "POST",
