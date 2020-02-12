@@ -51,11 +51,11 @@ export const firestoreUpdate = async (collection, doc, data) => {
   store.update(data);
 };
 
-export const store = async (collection, doc, data) => {
+export const store = async (collection, doc, data, purpose) => {
   const storage = database.collection(collection).doc(doc);
   const snapshot = await storage.get();
   if (snapshot.exists) {
-    if (data.category === "Upload") {
+    if (purpose === "dropzone") {
       if (window.confirm("Are you sure you wish to update this item?")) {
         delete data.timestamp;
         storage.update(data);

@@ -92,7 +92,7 @@ const Dropzone = () => {
           data.format = files[i].type;
           break;
       }
-      await store("Data", hashCode(files[i].name).toString(), data);
+      await store("Data", hashCode(files[i].name).toString(), data, "dropzone");
     }
     await fetch(url, {
       method: "POST",
