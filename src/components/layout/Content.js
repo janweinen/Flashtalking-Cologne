@@ -1,14 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
-import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DataContext from "../Context";
 import styled from "styled-components";
-import {
-  firestoreDelete,
-  firestoreUpdate,
-  firestoreAdd,
-  store
-} from "../Firebase";
+import { firestoreDelete, store } from "../Firebase";
 
 const Main = styled.main`
   background-color: #ffffff;
@@ -195,7 +189,7 @@ const Content = () => {
     }
   };
 
-  const test = async () => {
+  const newEntry = async () => {
     dataContext.setContent.setContent("Demo");
     const data = {
       client: "",
@@ -233,7 +227,7 @@ const Content = () => {
         </SearchModule>
         <NewEntryModule>
           <StyledIcon icon={["fas", "plus-circle"]} />
-          <button onClick={test}>
+          <button onClick={newEntry}>
             <ButtonText>NEW DEMOLINK</ButtonText>
           </button>
         </NewEntryModule>
@@ -258,7 +252,6 @@ const Content = () => {
                 <input type="checkbox" />
               </th>
               <th>Client</th>
-              {/*<th>Category</th>*/}
               <th>Format</th>
               <th>Device</th>
               <th>URL</th>
@@ -282,18 +275,6 @@ const Content = () => {
                 >
                   {item.client}
                 </td>
-                {/*
-                <td
-                  id="category"
-                  contentEditable={item.contentEditable.category}
-                  suppressContentEditableWarning={true}
-                  onBlur={e => {
-                    updateItem(e, item);
-                  }}
-                >
-                  {item.category}
-                </td>
-                */}
                 <td
                   id="format"
                   contentEditable={item.contentEditable.format}

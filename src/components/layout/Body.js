@@ -9,7 +9,10 @@ import {
   faExternalLinkAlt,
   faCog,
   faTrashAlt,
-  faSync
+  faSync,
+  faFolder,
+  faDesktop,
+  faUser
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import Dropzone from "../Dropzone";
@@ -20,7 +23,10 @@ library.add(
   faExternalLinkAlt,
   faCog,
   faTrashAlt,
-  faSync
+  faSync,
+  faFolder,
+  faDesktop,
+  faUser
 );
 
 const style = {

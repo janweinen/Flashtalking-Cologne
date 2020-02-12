@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/firestore";
 import "firebase/auth";
@@ -37,18 +37,18 @@ export const logout = async event => {
 };
 
 export const firestoreAdd = async (collection, data) => {
-  const store = await database.collection(collection);
-  store.add(data);
+  const store = database.collection(collection);
+  await store.add(data);
 };
 
 export const firestoreDelete = async (collection, id) => {
-  const store = await database.collection(collection);
-  store.doc(id).delete();
+  const store = database.collection(collection);
+  await store.doc(id).delete();
 };
 
 export const firestoreUpdate = async (collection, doc, data) => {
-  const store = await database.collection(collection).doc(doc);
-  store.update(data);
+  const store = database.collection(collection).doc(doc);
+  await store.update(data);
 };
 
 export const store = async (collection, doc, data, purpose) => {

@@ -1,105 +1,155 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { logout } from "../Firebase";
 import DataContext from "../Context";
 import Logo from "../../assets/images/FT-Logo@3x.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
-const style = {
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100vw",
-    height: "64px",
-    borderBottom: "3px solid #d6d8db",
-    backgroundColor: "#374047",
-    color: "rgba(255,255,255,1)"
-  },
-  headerItem: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: "20px",
-    image: {
-      height: "22px",
-      verticalAlign: "middle"
-    },
-    imageContainer: {
-      borderRight: "1px solid #979797",
-      paddingRight: "10px"
-    },
-    productName: {
-      color: "rgba(255,255,255,1)",
-      fontSize: "19px",
-      fontWeight: "400",
-      textTransform: "lowercase",
-      margin: "0 0 0 10px"
-    },
-    button: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      borderRight: "1px solid #4a5258",
-      height: "100%",
-      marginRight: "20px",
-      paddingRight: "20px",
-      fontSize: "12px",
-      cursor: "pointer",
-      color: "#aeb2b5"
-    },
-    userIcon: {
-      fontSize: "18px",
-      verticalAlign: "middle",
-      marginLeft: "10px"
-    },
-    buttonIcon: {
-      fontSize: "18px",
-      verticalAlign: "middle",
-      marginRight: "10px"
+const Head = styled.header`
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 64px;
+  border-bottom: 3px solid #d6d8db;
+  background-color: #374047;
+  color: rgba(255, 255, 255, 1);
+  padding-left: 20px;
+`;
+
+const HeaderSegment = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const HeaderItemButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  height: 100%;
+  font-size: 12px;
+  cursor: pointer;
+  color: #aeb2b5;
+  background-color: #374047;
+  padding: 20px;
+
+  &:hover {
+    background-color: #272f34;
+    color: #ffffff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Dropdown = styled.div`
+  position: relative;
+  display: inline-block;
+  height: 100%;
+
+  &:hover {
+    display: block;
+    > div {
+      display: block;
     }
   }
-};
+`;
+
+const HeaderItem = styled.div`
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  border-right: 1px solid #4a5258;
+`;
+
+const DropDownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  color: #374047;
+  font-size: 12px;
+  padding: 15px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  &:hover {
+    background-color: #d5eafa;
+  }
+`;
+
+const HeaderItemImageContainer = styled.div`
+  border-right: 1px solid #979797;
+  padding-right: 10px;
+`;
+
+const HeaderItemImage = styled.img`
+  height: 22px;
+  vertical-align: middle;
+`;
+
+const HeaderItemProductName = styled.h1`
+  color: rgba(255, 255, 255, 1);
+  font-size: 19px;
+  font-weight: 400;
+  text-transform: lowercase;
+  margin: 0 0 0 10px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  font-size: 18px;
+  vertical-align: middle;
+  margin-right: 10px;
+`;
+
+const UserIcon = styled(FontAwesomeIcon)`
+  font-size: 18px;
+  vertical-align: middle;
+  margin-left: 10px;
+`;
 
 const Header = () => {
+  const [active, setActive] = useState("Files");
   const dataContext = useContext(DataContext);
   return (
-    <header style={style.header}>
-      <div style={style.headerItem}>
-        <div style={style.headerItem.imageContainer}>
-          <img style={style.headerItem.image} src={Logo} alt="Logo" />
-        </div>
-        <h1 style={style.headerItem.productName}>cologne</h1>
-      </div>
-      <div style={style.headerItem}>
-        <div
-          style={style.headerItem.button}
-          onClick={() => dataContext.setContent.setContent("Upload")}
-        >
-          <FontAwesomeIcon
-            style={style.headerItem.buttonIcon}
-            icon={faUserCircle}
-          />
-          Files
-        </div>
-        <div
-          style={style.headerItem.button}
-          onClick={() => dataContext.setContent.setContent("Demo")}
-        >
-          <FontAwesomeIcon
-            style={style.headerItem.buttonIcon}
-            icon={faUserCircle}
-          />
-          Demos
-        </div>
-        <div style={style.headerItem.button} onClick={logout}>
-          {dataContext.user.email}
-          <FontAwesomeIcon
-            style={style.headerItem.userIcon}
-            icon={faUserCircle}
-          />
-        </div>
-      </div>
-    </header>
+    <Head>
+      <HeaderSegment>
+        <HeaderItemImageContainer>
+          <HeaderItemImage src={Logo} alt="Logo" />
+        </HeaderItemImageContainer>
+        <HeaderItemProductName>cologne</HeaderItemProductName>
+      </HeaderSegment>
+      <HeaderSegment>
+        <HeaderItem>
+          <HeaderItemButton
+            onClick={() => dataContext.setContent.setContent("Upload")}
+          >
+            <Icon icon={["fas", "folder"]} />
+            Files
+          </HeaderItemButton>
+        </HeaderItem>
+        <HeaderItem>
+          <HeaderItemButton
+            onClick={() => dataContext.setContent.setContent("Demo")}
+          >
+            <Icon icon={["fas", "desktop"]} />
+            Demos
+          </HeaderItemButton>
+        </HeaderItem>
+        <Dropdown>
+          <HeaderItemButton>
+            {dataContext.user.email}
+            <UserIcon icon={["fas", "user"]} />
+          </HeaderItemButton>
+          <DropDownContent>
+            <div onClick={logout}>Logout</div>
+          </DropDownContent>
+        </Dropdown>
+      </HeaderSegment>
+    </Head>
   );
 };
 
