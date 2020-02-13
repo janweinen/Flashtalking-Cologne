@@ -1,6 +1,7 @@
 import React from "react";
 import { authentication } from "../Firebase";
 import styled from "styled-components";
+import Background from "../../assets/images/ft_bg.jpg";
 
 const signIn = async event => {
   event.preventDefault();
@@ -15,6 +16,8 @@ const Main = styled.main`
   width: 100vw;
   height: 100vh;
   background-color: #374047;
+  background-image: url(${Background});
+  background-size: cover;
 `;
 
 const Headline = styled.h1`
