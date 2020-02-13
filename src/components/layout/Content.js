@@ -157,6 +157,7 @@ const Content = () => {
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
+  console.log(dataContext.entries);
   useEffect(() => {
     const init = async () => {
       const results = await dataContext.entries.filter(item =>
@@ -200,14 +201,18 @@ const Content = () => {
       lastChanged: new Date().toLocaleString(),
       timestamp: new Date().getTime().toString(),
       name: "",
-      contentEditable: {
-        client: true,
-        format: true,
-        device: true,
-        url: true
-      }
+      contentEditable: "true"
     };
     await store("Data", data.timestamp, data);
+  };
+
+  const isEditable = value => {
+    if (value === "true") {
+      console.log("true");
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -267,7 +272,7 @@ const Content = () => {
                 </td>
                 <td
                   id="client"
-                  contentEditable={item.contentEditable.client}
+                  contentEditable={isEditable(item.contentEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -277,7 +282,7 @@ const Content = () => {
                 </td>
                 <td
                   id="format"
-                  contentEditable={item.contentEditable.format}
+                  contentEditable={isEditable(item.contentEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -287,7 +292,7 @@ const Content = () => {
                 </td>
                 <td
                   id="device"
-                  contentEditable={item.contentEditable.device}
+                  contentEditable={isEditable(item.contentEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -297,7 +302,7 @@ const Content = () => {
                 </td>
                 <td
                   id="url"
-                  contentEditable={item.contentEditable.url}
+                  contentEditable={isEditable(item.contentEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);

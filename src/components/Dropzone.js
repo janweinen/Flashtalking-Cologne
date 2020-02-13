@@ -76,12 +76,7 @@ const Dropzone = () => {
         lastChanged: new Date().toLocaleString(),
         timestamp: new Date().getTime().toString(),
         name: files[i].name,
-        contentEditable: {
-          client: false,
-          format: false,
-          device: false,
-          url: false
-        }
+        contentEditable: "false"
       };
       switch (true) {
         case files[i].type.indexOf("presentation") !== -1:
