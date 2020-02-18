@@ -58,6 +58,7 @@ export const store = async (collection, doc, data, purpose) => {
     if (purpose === "dropzone") {
       if (window.confirm("Are you sure you wish to update this item?")) {
         delete data.timestamp;
+        delete data.client;
         storage.update(data);
       }
     } else {

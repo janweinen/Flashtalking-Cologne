@@ -15,6 +15,7 @@ const DropzoneContainer = styled.div`
   z-index: 99999;
   background: rgba(0, 0, 0, 0.3);
   border: 11px dashed rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2px);
 `;
 
 const Input = styled.input`
@@ -76,7 +77,10 @@ const Dropzone = () => {
         lastChanged: new Date().toLocaleString(),
         timestamp: new Date().getTime().toString(),
         name: files[i].name,
-        contentEditable: "false"
+        clientEditable: "true",
+        formatEditable: "false",
+        deviceEditable: "false",
+        urlEditable: "false"
       };
       switch (true) {
         case files[i].type.indexOf("presentation") !== -1:

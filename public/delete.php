@@ -1,5 +1,5 @@
 <?php
-   if(!empty($_POST["file"])){  
-      unlink($_POST["file"])
-   }
-?>  
+   $file = $_REQUEST['file'];
+   $path = $_SERVER['DOCUMENT_ROOT']."Studio/Jan/build/upload/$file";
+   unlink($path)
+?>

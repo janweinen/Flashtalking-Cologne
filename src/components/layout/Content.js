@@ -153,31 +153,23 @@ const Content = () => {
   const dataContext = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(true);
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
-  console.log(dataContext.entries);
   useEffect(() => {
     const init = async () => {
       const results = await dataContext.entries.filter(item =>
         Object.keys(item).some(key => item[key].includes(searchTerm))
       );
       setSearchResults(results);
-      setLoading(false);
     };
     init();
   }, [searchTerm, dataContext.entries]);
 
   const deleteItem = item => {
     firestoreDelete("Data", item.id);
-    fetch("delete.php", {
-      method: "POST",
-      data: {
-        file: "upload/" + item.name
-      }
-    }).then(response => {
-      console.log(response, item.name);
+    fetch("delete.php?file=" + item.name, {
+      method: "GET"
     });
   };
 
@@ -201,14 +193,16 @@ const Content = () => {
       lastChanged: new Date().toLocaleString(),
       timestamp: new Date().getTime().toString(),
       name: "",
-      contentEditable: "true"
+      clientEditable: "true",
+      formatEditable: "true",
+      deviceEditable: "true",
+      urlEditable: "true"
     };
     await store("Data", data.timestamp, data);
   };
 
   const isEditable = value => {
     if (value === "true") {
-      console.log("true");
       return true;
     } else {
       return false;
@@ -236,18 +230,6 @@ const Content = () => {
             <ButtonText>NEW DEMOLINK</ButtonText>
           </button>
         </NewEntryModule>
-        {/*
-        <Modal
-          activator={({ setShow }) => (
-            <NewEntryModule>
-              <StyledIcon icon={["fas", "plus-circle"]} />
-              <button onClick={test}>
-                <ButtonText>NEW DEMOLINK</ButtonText>
-              </button>
-            </NewEntryModule>
-          )}
-        />
-        */}
       </TableMenu>
       <TableContainer>
         <Table>
@@ -272,7 +254,7 @@ const Content = () => {
                 </td>
                 <td
                   id="client"
-                  contentEditable={isEditable(item.contentEditable)}
+                  contentEditable={isEditable(item.clientEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -282,7 +264,7 @@ const Content = () => {
                 </td>
                 <td
                   id="format"
-                  contentEditable={isEditable(item.contentEditable)}
+                  contentEditable={isEditable(item.formatEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -292,7 +274,7 @@ const Content = () => {
                 </td>
                 <td
                   id="device"
-                  contentEditable={isEditable(item.contentEditable)}
+                  contentEditable={isEditable(item.deviceEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
@@ -302,7 +284,7 @@ const Content = () => {
                 </td>
                 <td
                   id="url"
-                  contentEditable={isEditable(item.contentEditable)}
+                  contentEditable={isEditable(item.urlEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);

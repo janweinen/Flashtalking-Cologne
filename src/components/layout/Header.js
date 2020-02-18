@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { logout } from "../Firebase";
 import DataContext from "../Context";
 import Logo from "../../assets/images/FT-Logo@3x.png";
@@ -41,6 +41,11 @@ const HeaderItemButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+
+  &.active {
+    background-color: #272f34;
+    color: #ffffff;
   }
 `;
 
@@ -113,6 +118,7 @@ const UserIcon = styled(FontAwesomeIcon)`
 
 const Header = () => {
   const dataContext = useContext(DataContext);
+  const [active, setActive] = useState("Demo");
   return (
     <Head>
       <HeaderSegment>
@@ -124,18 +130,26 @@ const Header = () => {
       <HeaderSegment>
         <HeaderItem>
           <HeaderItemButton
-            onClick={() => dataContext.setContent.setContent("Upload")}
+            onClick={() => {
+              dataContext.setContent.setContent("Demo");
+              setActive("Demo");
+            }}
+            className={active === "Demo" ? "active" : ""}
           >
-            <Icon icon={["fas", "folder"]} />
-            Files
+            <Icon icon={["fas", "desktop"]} />
+            Demos
           </HeaderItemButton>
         </HeaderItem>
         <HeaderItem>
           <HeaderItemButton
-            onClick={() => dataContext.setContent.setContent("Demo")}
+            onClick={() => {
+              dataContext.setContent.setContent("Upload");
+              setActive("Upload");
+            }}
+            className={active === "Upload" ? "active" : ""}
           >
-            <Icon icon={["fas", "desktop"]} />
-            Demos
+            <Icon icon={["fas", "folder"]} />
+            Files
           </HeaderItemButton>
         </HeaderItem>
         <Dropdown>

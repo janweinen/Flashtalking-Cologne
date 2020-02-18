@@ -9,7 +9,7 @@ import "./styles.css";
 
 const App = () => {
   const [data, setData] = useState({});
-  const [content, setContent] = useState("Upload");
+  const [content, setContent] = useState("Demo");
   useEffect(() => {
     let collection = {};
     try {

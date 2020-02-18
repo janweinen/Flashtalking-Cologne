@@ -33,7 +33,7 @@ library.add(
 
 const style = {
   body: {
-    height: window.innerHeight + "px",
+    height: "100vh",
     fontFamily: "Open Sans",
     backgroundColor: "#f4f5f5"
   }
