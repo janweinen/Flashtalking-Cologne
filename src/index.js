@@ -33,6 +33,7 @@ const App = () => {
                 collection = {
                   ...collection,
                   entries: entries,
+                  content: content,
                   setContent: { setContent }
                 };
                 setData(collection);

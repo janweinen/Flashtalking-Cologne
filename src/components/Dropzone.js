@@ -48,7 +48,7 @@ const hashCode = s =>
 const Dropzone = () => {
   const dataContext = useContext(DataContext);
   const [loading, setLoading] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef();
   const url = "process.php";
   window.addEventListener("dragenter", () => {
     showDropZone();

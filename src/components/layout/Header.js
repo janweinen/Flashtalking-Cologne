@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { logout } from "../Firebase";
 import DataContext from "../Context";
 import Logo from "../../assets/images/FT-Logo@3x.png";
@@ -118,7 +118,6 @@ const UserIcon = styled(FontAwesomeIcon)`
 
 const Header = () => {
   const dataContext = useContext(DataContext);
-  const [active, setActive] = useState("Demo");
   return (
     <Head>
       <HeaderSegment>
@@ -132,9 +131,8 @@ const Header = () => {
           <HeaderItemButton
             onClick={() => {
               dataContext.setContent.setContent("Demo");
-              setActive("Demo");
             }}
-            className={active === "Demo" ? "active" : ""}
+            className={dataContext.content === "Demo" ? "active" : ""}
           >
             <Icon icon={["fas", "desktop"]} />
             Demos
@@ -144,9 +142,8 @@ const Header = () => {
           <HeaderItemButton
             onClick={() => {
               dataContext.setContent.setContent("Upload");
-              setActive("Upload");
             }}
-            className={active === "Upload" ? "active" : ""}
+            className={dataContext.content === "Upload" ? "active" : ""}
           >
             <Icon icon={["fas", "folder"]} />
             Files
