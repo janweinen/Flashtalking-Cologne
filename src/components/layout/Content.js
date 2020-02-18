@@ -294,7 +294,7 @@ const Content = () => {
                 </td>
                 <td>{item.lastChanged}</td>
                 <td>
-                  <a href={item.url}>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">
                     <StyledIcon
                       icon={["fas", "external-link-alt"]}
                       fixedWidth
