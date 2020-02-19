@@ -72,7 +72,7 @@ const Dropzone = () => {
         category: "Upload",
         format: "",
         device: "–",
-        tags: "",
+        tags: "–",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
         lastChanged: new Date().toLocaleString(),

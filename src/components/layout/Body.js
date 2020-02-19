@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Content from "./Content";
+import Footer from "./Footer";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -45,6 +46,7 @@ const Body = () => {
       <Header />
       <Dropzone />
       <Content />
+      <Footer />
     </div>
   );
 };
