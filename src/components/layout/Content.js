@@ -160,7 +160,7 @@ const Content = () => {
     const init = async () => {
       const results = await dataContext.entries.filter(item =>
         Object.keys(item).some(key =>
-          item[key].toLowerCase().includes(searchTerm)
+          item[key].toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
       setSearchResults(results);
