@@ -48,7 +48,7 @@ const hashCode = s =>
 const Dropzone = () => {
   const dataContext = useContext(DataContext);
   const [loading, setLoading] = useState(false);
-  const containerRef = useRef();
+  const dropzone = useRef();
   const url = "process.php";
   window.addEventListener("dragenter", () => {
     showDropZone();
@@ -108,15 +108,15 @@ const Dropzone = () => {
     setLoading(false);
   };
   const showDropZone = () => {
-    containerRef.current.style.display = "block";
+    dropzone.current.style.display = "block";
     console.log("on");
   };
   const hideDropZone = () => {
-    containerRef.current.style.display = "none";
+    dropzone.current.style.display = "none";
     console.log("off");
   };
   return (
-    <DropzoneContainer ref={containerRef} onDragLeave={hideDropZone}>
+    <DropzoneContainer ref={dropzone} onDragLeave={hideDropZone}>
       {loading ? (
         <div style={{ color: "#ffffff" }}>
           <StyledIcon icon={["fas", "sync"]} spin />
