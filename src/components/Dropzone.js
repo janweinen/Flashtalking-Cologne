@@ -71,7 +71,8 @@ const Dropzone = () => {
         client: "Flashtalking",
         category: "Upload",
         format: "",
-        device: "N/A",
+        device: "–",
+        tags: "",
         url:
           "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
         lastChanged: new Date().toLocaleString(),
@@ -79,7 +80,8 @@ const Dropzone = () => {
         name: files[i].name,
         clientEditable: "true",
         formatEditable: "false",
-        deviceEditable: "false",
+        deviceEditable: "true",
+        tagsEditable: "true",
         urlEditable: "false",
         user: dataContext.user.email,
         uid: dataContext.user.uid

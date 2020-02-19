@@ -191,6 +191,7 @@ const Content = () => {
       category: "Demo",
       format: "",
       device: "",
+      tags: "",
       url: "",
       lastChanged: new Date().toLocaleString(),
       timestamp: new Date().getTime().toString(),
@@ -198,6 +199,7 @@ const Content = () => {
       clientEditable: "true",
       formatEditable: "true",
       deviceEditable: "true",
+      tagsEditable: "true",
       urlEditable: "true",
       user: dataContext.user.email,
       uid: dataContext.user.uid
@@ -245,6 +247,7 @@ const Content = () => {
               <th>Client</th>
               <th>Format</th>
               <th>Device</th>
+              <th>Tags</th>
               <th>URL</th>
               <th>Last Changed</th>
               <th>Actions</th>
@@ -285,6 +288,16 @@ const Content = () => {
                   }}
                 >
                   {item.device}
+                </td>
+                <td
+                  id="tags"
+                  contentEditable={isEditable(item.tagsEditable)}
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    updateItem(e, item);
+                  }}
+                >
+                  {item.tags}
                 </td>
                 <td
                   id="url"

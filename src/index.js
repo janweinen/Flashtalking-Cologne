@@ -24,7 +24,6 @@ const App = () => {
     try {
       auth.onAuthStateChanged(user => {
         if (user) {
-          console.log(user);
           collection = {
             signedIn: true,
             user: {
