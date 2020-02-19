@@ -80,7 +80,9 @@ const Dropzone = () => {
         clientEditable: "true",
         formatEditable: "false",
         deviceEditable: "false",
-        urlEditable: "false"
+        urlEditable: "false",
+        user: dataContext.user.email,
+        uid: dataContext.user.uid
       };
       switch (true) {
         case files[i].type.indexOf("presentation") !== -1:

@@ -159,7 +159,9 @@ const Content = () => {
   useEffect(() => {
     const init = async () => {
       const results = await dataContext.entries.filter(item =>
-        Object.keys(item).some(key => item[key].includes(searchTerm))
+        Object.keys(item).some(key =>
+          item[key].toLowerCase().includes(searchTerm)
+        )
       );
       setSearchResults(results);
     };
@@ -196,7 +198,9 @@ const Content = () => {
       clientEditable: "true",
       formatEditable: "true",
       deviceEditable: "true",
-      urlEditable: "true"
+      urlEditable: "true",
+      user: dataContext.user.email,
+      uid: dataContext.user.uid
     };
     await store("Data", data.timestamp, data);
   };

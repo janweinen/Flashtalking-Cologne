@@ -151,7 +151,7 @@ const Header = () => {
         </HeaderItem>
         <Dropdown>
           <HeaderItemButton>
-            {dataContext.user.email}
+            Welcome, {dataContext.user.name}
             <UserIcon icon={["fas", "user"]} />
           </HeaderItemButton>
           <DropDownContent>
