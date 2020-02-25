@@ -26,16 +26,6 @@ export const authentication = async (email, password) => {
   }
 };
 
-export const logout = async event => {
-  event.preventDefault();
-  try {
-    await firebase.auth().signOut();
-    console.log("Logged out");
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 export const firestoreAdd = async (collection, data) => {
   const store = database.collection(collection);
   await store.add(data);
@@ -59,6 +49,8 @@ export const store = async (collection, doc, data, purpose) => {
       if (window.confirm("Are you sure you wish to update this item?")) {
         delete data.timestamp;
         delete data.client;
+        delete data.device;
+        delete data.tags;
         storage.update(data);
       }
     } else {

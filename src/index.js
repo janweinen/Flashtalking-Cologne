@@ -32,8 +32,7 @@ const App = () => {
               name: returnNameFromEmail(user.email)
             }
           };
-          // unscubscribe???
-          database
+          const unsubscribe = database
             .collection("Data")
             .where("category", "==", content)
             .orderBy("timestamp", "desc")
@@ -47,7 +46,8 @@ const App = () => {
                   ...collection,
                   entries: entries,
                   content: content,
-                  setContent: { setContent }
+                  setContent: { setContent },
+                  unsubscribe: { unsubscribe }
                 };
                 setData(collection);
               }

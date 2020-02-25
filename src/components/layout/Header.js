@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { logout } from "../Firebase";
+import { auth } from "../Firebase";
 import DataContext from "../Context";
 import Logo from "../../assets/images/FT-Logo@3x.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -118,6 +118,10 @@ const UserIcon = styled(FontAwesomeIcon)`
 
 const Header = () => {
   const dataContext = useContext(DataContext);
+  const logout = () => {
+    auth.signOut();
+    dataContext.unsubscribe.unsubscribe();
+  };
   return (
     <Head>
       <HeaderSegment>
