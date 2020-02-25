@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { authentication } from "../Firebase";
 import styled from "styled-components";
 import Background from "../../assets/images/ft_bg.jpg";
-
-const signIn = async event => {
-  event.preventDefault();
-  const form = document.querySelector("#signup");
-  const email = form.email.value;
-  const password = form.password.value;
-  await authentication(email, password);
-};
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Main = styled.main`
   position: absolute;
@@ -76,6 +69,10 @@ const LoginButton = styled.button`
     background-color: #aaaaaa;
   }
 
+  &:active {
+    background-color: #888888;
+  }
+
   &:focus {
     outline: none;
   }
@@ -86,7 +83,20 @@ const Fieldset = styled.fieldset`
   margin-bottom: 1.5em;
 `;
 
+const Spinner = styled(FontAwesomeIcon)`
+  color: #ffffff;
+`;
+
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const signIn = async event => {
+    setLoading(true);
+    event.preventDefault();
+    const form = document.querySelector("#signup");
+    const email = form.email.value;
+    const password = form.password.value;
+    await authentication(email, password);
+  };
   return (
     <Main>
       <LoginContainer>
@@ -102,7 +112,13 @@ const Login = () => {
           </form>
         </Fieldset>
         <LoginButton id="login" onClick={signIn}>
-          LOGIN
+          <div>
+            {loading ? (
+              <Spinner icon={["fas", "circle-notch"]} spin />
+            ) : (
+              <div>LOGIN</div>
+            )}
+          </div>
         </LoginButton>
       </LoginContainer>
     </Main>
