@@ -102,6 +102,10 @@ const Table = styled.table`
     vertical-align: top;
   }
 
+  thead  {
+    border-bottom: 1px solid #e9eaeb;
+  }
+
   thead th {
     text-align: left;
     background-color: #ffffff;
@@ -109,8 +113,8 @@ const Table = styled.table`
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    border-bottom: 1px solid #e9eaeb;
   }
+
   /* safari and ios need the tfoot itself to be position:sticky also */
   tfoot,
   tfoot th,
