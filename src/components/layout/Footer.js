@@ -12,7 +12,7 @@ const FooterContainer = styled.footer`
 const Footer = () => {
   return (
     <FooterContainer>
-      flashtalking|cologne. v0.0.1#1 &copy; Simplicity Marketing Ltd. 2020 –
+      flashtalking|cologne. v0.0.1#2 &copy; Simplicity Marketing Ltd. 2020 –
       Flashtalking is a trademark of Simplicity Marketing Ltd.
     </FooterContainer>
   );
