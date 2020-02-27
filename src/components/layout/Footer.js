@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import pkg from "../../../package.json";
 
 const FooterContainer = styled.footer`
   width: 100%;
@@ -12,8 +13,8 @@ const FooterContainer = styled.footer`
 const Footer = () => {
   return (
     <FooterContainer>
-      flashtalking|cologne. v0.0.1#2 &copy; Simplicity Marketing Ltd. 2020 –
-      Flashtalking is a trademark of Simplicity Marketing Ltd.
+      flashtalking|cologne. v{pkg.version} &copy; Simplicity Marketing Ltd. 2020
+      – Flashtalking is a trademark of Simplicity Marketing Ltd.
     </FooterContainer>
   );
 };
