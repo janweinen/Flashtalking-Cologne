@@ -87,15 +87,25 @@ const Spinner = styled(FontAwesomeIcon)`
   color: #ffffff;
 `;
 
-const Login = () => {
-  const [loading, setLoading] = useState(false);
+const Login = props => {
+  const [message, setMessage] = useState("LOGIN");
+  console.log(props.signedIn);
+  if (props.signedIn) {
+    setMessage(<Spinner icon={["fas", "circle-notch"]} spin />);
+  }
   const signIn = async event => {
-    setLoading(true);
+    setMessage(<Spinner icon={["fas", "circle-notch"]} spin />);
     event.preventDefault();
     const form = document.querySelector("#signup");
     const email = form.email.value;
     const password = form.password.value;
-    await authentication(email, password);
+    const auth = await authentication(email, password);
+    if (auth) {
+      setMessage(auth.toUpperCase());
+    }
+  };
+  const onChangeHandler = () => {
+    setMessage("LOGIN");
   };
   return (
     <Main>
@@ -106,19 +116,18 @@ const Login = () => {
         <Fieldset>
           <form id="signup">
             <label htmlFor="email">Email:</label>
-            <Input type="email" id="email" />
+            <Input type="email" id="email" onChange={onChangeHandler} />
             <label htmlFor="password">Password:</label>
-            <Input type="password" id="password" required />
+            <Input
+              type="password"
+              id="password"
+              required
+              onChange={onChangeHandler}
+            />
           </form>
         </Fieldset>
         <LoginButton id="login" onClick={signIn}>
-          <div>
-            {loading ? (
-              <Spinner icon={["fas", "circle-notch"]} spin />
-            ) : (
-              <div>LOGIN</div>
-            )}
-          </div>
+          <div>{message}</div>
         </LoginButton>
       </LoginContainer>
     </Main>
