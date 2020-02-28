@@ -64,7 +64,7 @@ const App = () => {
   }, [content]);
   return (
     <DataProvider value={data}>
-      <div>{data.signedIn ? <Body /> : <Login signedIn={data.signedIn} />}</div>
+      <div>{data.signedIn ? <Body /> : <Login />}</div>
     </DataProvider>
   );
 };

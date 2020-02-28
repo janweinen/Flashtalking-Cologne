@@ -87,12 +87,8 @@ const Spinner = styled(FontAwesomeIcon)`
   color: #ffffff;
 `;
 
-const Login = props => {
+const Login = () => {
   const [message, setMessage] = useState("LOGIN");
-  console.log(props.signedIn);
-  if (props.signedIn) {
-    setMessage(<Spinner icon={["fas", "circle-notch"]} spin />);
-  }
   const signIn = async event => {
     setMessage(<Spinner icon={["fas", "circle-notch"]} spin />);
     event.preventDefault();

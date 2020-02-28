@@ -74,16 +74,18 @@ const Dropzone = () => {
         device: "–",
         tags: "–",
         url:
-          "https://flashtalking.info/Studio/Jan/build/upload/" + files[i].name,
+          "https://flashtalking.info/Studio/Jan/build/upload/" +
+          files[i].name.replace(/[^a-zA-Z0-9.]/g, ""),
         lastChanged: new Date().toLocaleString(),
         timestamp: new Date().getTime().toString(),
-        name: files[i].name,
+        name: files[i].name.replace(/[^a-zA-Z0-9.]/g, ""),
         clientEditable: "true",
         formatEditable: "false",
         deviceEditable: "true",
         tagsEditable: "true",
         urlEditable: "false",
         user: dataContext.user.email,
+        userName: dataContext.user.name,
         uid: dataContext.user.uid
       };
       switch (true) {
@@ -97,7 +99,12 @@ const Dropzone = () => {
           data.format = files[i].type;
           break;
       }
-      await store("Data", hashCode(files[i].name).toString(), data, "dropzone");
+      await store(
+        "Data",
+        hashCode(files[i].name.replace(/[^a-zA-Z0-9.]/g, "")).toString(),
+        data,
+        "dropzone"
+      );
       dataContext.setContent.setContent("Upload");
     }
     await fetch(url, {

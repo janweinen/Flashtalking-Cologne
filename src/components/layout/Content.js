@@ -162,6 +162,16 @@ const Content = () => {
   };
   useEffect(() => {
     const init = async () => {
+      /*
+      if (dataContext.content === "Upload") {
+        const userData = await dataContext.entries.filter(item =>
+          Object.keys(item).some(key =>
+            item[key].includes("y9QzvNmTBnSOhl8dYxOGwFqVdsy2")
+          )
+        );
+        console.log(userData);
+      }
+      */
       const results = await dataContext.entries.filter(item =>
         Object.keys(item).some(key =>
           item[key].toLowerCase().includes(searchTerm.toLowerCase())
@@ -170,7 +180,7 @@ const Content = () => {
       setSearchResults(results);
     };
     init();
-  }, [searchTerm, dataContext.entries]);
+  }, [searchTerm, dataContext.entries, dataContext.content]);
 
   const deleteItem = item => {
     firestoreDelete("Data", item.id);
@@ -205,7 +215,8 @@ const Content = () => {
       deviceEditable: "true",
       tagsEditable: "true",
       urlEditable: "true",
-      user: dataContext.user.email,
+      userEmail: dataContext.user.email,
+      userName: dataContext.user.name,
       uid: dataContext.user.uid
     };
     await store("Data", data.timestamp, data);
@@ -254,6 +265,7 @@ const Content = () => {
               <th>Tags</th>
               <th>URL</th>
               <th>Last Changed</th>
+              <th>User</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -314,6 +326,7 @@ const Content = () => {
                   {item.url}
                 </td>
                 <td>{item.lastChanged}</td>
+                <td>{item.userName}</td>
                 <td>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
                     <StyledIcon

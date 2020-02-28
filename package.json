@@ -1,7 +1,7 @@
 {
   "homepage": "https://www.flashtalking.info/Studio/Jan/build/",
   "name": "flashtalking-cologne",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "",
   "keywords": [],
   "main": "src/index.js",

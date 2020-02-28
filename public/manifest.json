@@ -1,0 +1,8 @@
+{
+  "name": "Flashtalking Cologne",
+  "short_name": "FTCGN",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Flashtalking Cologne"
+}
