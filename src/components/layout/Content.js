@@ -113,6 +113,7 @@ const Table = styled.table`
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    font-weight: 600;
   }
 
   /* safari and ios need the tfoot itself to be position:sticky also */
@@ -265,7 +266,7 @@ const Content = () => {
               <th>Tags</th>
               <th>URL</th>
               <th>Last Changed</th>
-              <th>User</th>
+              <th>Created By:</th>
               <th>Actions</th>
             </tr>
           </thead>
