@@ -4,12 +4,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['files'])) {
         $errors = [];
         $path = 'upload/';
-		$extensions = ['jpg', 'jpeg', 'png', 'gif', 'pptx', 'docx', 'xls', 'pdf', 'zip'];
+		$extensions = ['jpg', 'jpeg', 'png', 'gif', 'pptx', 'docx', 'xls', 'pdf', 'zip', 'csv'];
 		
         $all_files = count($_FILES['files']['tmp_name']);
 
         for ($i = 0; $i < $all_files; $i++) {  
-		$file_name = preg_replace('/[^a-zA-Z0-9.]/', '', $_FILES['files']['name'][$i]);//$_FILES['files']['name'][$i];
+		$file_name = preg_replace('/[^a-zA-Z0-9._]/', '', $_FILES['files']['name'][$i]);//$_FILES['files']['name'][$i];
 		$file_tmp = $_FILES['files']['tmp_name'][$i];
 		$file_type = $_FILES['files']['type'][$i];
 		$file_size = $_FILES['files']['size'][$i];

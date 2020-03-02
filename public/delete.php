@@ -1,5 +1,5 @@
 <?php
    $file = $_REQUEST['file'];
-   $path = $_SERVER['DOCUMENT_ROOT']."Studio/Jan/build/upload/$file";
+   $path = $_SERVER['DOCUMENT_ROOT']."ftcologne/upload/$file";
    unlink($path)
 ?>

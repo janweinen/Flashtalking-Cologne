@@ -74,11 +74,11 @@ const Dropzone = () => {
         device: "–",
         tags: "–",
         url:
-          "https://flashtalking.info/Studio/Jan/build/upload/" +
-          files[i].name.replace(/[^a-zA-Z0-9.]/g, ""),
+          "https://www.flashtalking.info/ftcologne/upload/" +
+          files[i].name.replace(/[^a-zA-Z0-9._]/g, ""),
         lastChanged: new Date().toLocaleString(),
         timestamp: new Date().getTime().toString(),
-        name: files[i].name.replace(/[^a-zA-Z0-9.]/g, ""),
+        name: files[i].name.replace(/[^a-zA-Z0-9._]/g, ""),
         clientEditable: "true",
         formatEditable: "false",
         deviceEditable: "true",
@@ -101,7 +101,7 @@ const Dropzone = () => {
       }
       await store(
         "Data",
-        hashCode(files[i].name.replace(/[^a-zA-Z0-9.]/g, "")).toString(),
+        hashCode(files[i].name.replace(/[^a-zA-Z0-9._]/g, "")).toString(),
         data,
         "dropzone"
       );
