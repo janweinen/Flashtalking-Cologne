@@ -89,11 +89,14 @@ const Dropzone = () => {
         uid: dataContext.user.uid
       };
       switch (true) {
-        case files[i].type.indexOf("presentation") !== -1:
-          data.format = "pptx";
+        case files[i].name.indexOf("pptx") !== -1:
+          data.format = "powerpoint/pptx";
           break;
-        case files[i].type.indexOf("document") !== -1:
-          data.format = "docx";
+        case files[i].name.indexOf("docx") !== -1:
+          data.format = "word/docx";
+          break;
+        case files[i].name.indexOf("xlsx") !== -1:
+          data.format = "excel/xslx";
           break;
         default:
           data.format = files[i].type;
@@ -110,6 +113,8 @@ const Dropzone = () => {
     await fetch(url, {
       method: "POST",
       body: formData
+    }).then(response => {
+      console.log(response, files);
     });
     hideDropZone();
     setLoading(false);
