@@ -44,6 +44,7 @@ const NewEntryModule = styled.div`
     cursor: pointer;
     border: none;
     font-weight: 600;
+    background-color: transparent;
   }
 `;
 
