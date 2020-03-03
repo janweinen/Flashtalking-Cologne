@@ -35,6 +35,17 @@ const SearchModule = styled.div`
   }
 `;
 
+const ButtonText = styled.div`
+  color: #208ce3;
+  font-size: 12px;
+  display: inline-block;
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  color: #208ce3;
+  vertical-align: middle;
+`;
+
 const NewEntryModule = styled.div`
   display: flex;
   flex-direction: row;
@@ -46,17 +57,12 @@ const NewEntryModule = styled.div`
     font-weight: 600;
     background-color: transparent;
   }
-`;
-
-const ButtonText = styled.div`
-  color: #2d7ebf;
-  font-size: 12px;
-  display: inline-block;
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  color: #2d7ebf;
-  vertical-align: middle;
+  &:hover ${ButtonText} {
+    color: #1e62a1;
+  }
+  &:hover ${StyledIcon} {
+    color: #1e62a1;
+  }
 `;
 
 const TableContainer = styled.div`
