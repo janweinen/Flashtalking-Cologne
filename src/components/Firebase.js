@@ -27,19 +27,9 @@ export const authentication = async (email, password) => {
   }
 };
 
-export const firestoreAdd = async (collection, data) => {
-  const store = database.collection(collection);
-  await store.add(data);
-};
-
 export const firestoreDelete = async (collection, id) => {
   const store = database.collection(collection);
   await store.doc(id).delete();
-};
-
-export const firestoreUpdate = async (collection, doc, data) => {
-  const store = database.collection(collection).doc(doc);
-  await store.update(data);
 };
 
 export const store = async (collection, doc, data, purpose) => {
@@ -65,32 +55,3 @@ export const store = async (collection, doc, data, purpose) => {
       .set(data);
   }
 };
-/*
-export const firestoreRequest = async (collection, doc) => {
-  const request = await database.collection(collection).doc(doc);
-  const snapshot = await request.get();
-  return snapshot.data();
-};
-
-export const firestoreSave = async (collection, doc, data) => {
-  const store = await database.collection(collection).doc(doc);
-  store.set(data);
-};
-
-export const firestoreUpdate = async (collection, doc, data) => {
-  const store = await database.collection(collection).doc(doc);
-  store.update(data);
-};
-
-export const firestoreAdd = async (collection, data) => {
-  console.log(collection, data);
-  const store = await database.collection(collection);
-  store.add(data);
-};
-
-export const getFirestore = async collection => {
-  const request = await database.collection(collection);
-  const snapshot = await request.get();
-  return snapshot.docs.map(doc => doc.data());
-};
-*/

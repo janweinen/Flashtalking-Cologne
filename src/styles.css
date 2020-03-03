@@ -16,26 +16,3 @@ html {
   font-family: sans-serif;
   text-align: center;
 }
-
-@keyframes fadeIn {
-  0% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/*
-th:first-child {
-  position: -webkit-sticky;
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  background: #ccc;
-}
-thead th:first-child,
-tfoot th:first-child {
-  z-index: 5;
-}
-*/
