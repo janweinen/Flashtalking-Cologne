@@ -290,6 +290,13 @@ const Content = () => {
                   onBlur={e => {
                     updateItem(e, item);
                   }}
+                  onKeyDown={e => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      updateItem(e, item);
+                      e.target.blur();
+                    }
+                  }}
                 >
                   {item.client}
                 </td>
@@ -299,6 +306,13 @@ const Content = () => {
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
+                  }}
+                  onKeyDown={e => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      updateItem(e, item);
+                      e.target.blur();
+                    }
                   }}
                 >
                   {item.format}
@@ -310,6 +324,13 @@ const Content = () => {
                   onBlur={e => {
                     updateItem(e, item);
                   }}
+                  onKeyDown={e => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      updateItem(e, item);
+                      e.target.blur();
+                    }
+                  }}
                 >
                   {item.device}
                 </td>
@@ -320,6 +341,13 @@ const Content = () => {
                   onBlur={e => {
                     updateItem(e, item);
                   }}
+                  onKeyDown={e => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      updateItem(e, item);
+                      e.target.blur();
+                    }
+                  }}
                 >
                   {item.tags}
                 </td>
@@ -329,6 +357,13 @@ const Content = () => {
                   suppressContentEditableWarning={true}
                   onBlur={e => {
                     updateItem(e, item);
+                  }}
+                  onKeyDown={e => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      updateItem(e, item);
+                      e.target.blur();
+                    }
                   }}
                 >
                   {item.url}

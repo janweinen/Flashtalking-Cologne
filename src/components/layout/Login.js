@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { authentication } from "../Firebase";
 import styled from "styled-components";
 import Background from "../../assets/images/ft_bg.jpg";
@@ -89,9 +89,8 @@ const Spinner = styled(FontAwesomeIcon)`
 
 const Login = () => {
   const [message, setMessage] = useState("LOGIN");
-  const signIn = async event => {
+  const signIn = async () => {
     setMessage(<Spinner icon={["fas", "circle-notch"]} spin />);
-    event.preventDefault();
     const form = document.querySelector("#signup");
     const email = form.email.value;
     const password = form.password.value;
@@ -112,13 +111,27 @@ const Login = () => {
         <Fieldset>
           <form id="signup">
             <label htmlFor="email">Email:</label>
-            <Input type="email" id="email" onChange={onChangeHandler} />
+            <Input
+              type="email"
+              id="email"
+              onChange={onChangeHandler}
+              onKeyDown={event => {
+                if (event.keyCode === 13) {
+                  signIn();
+                }
+              }}
+            />
             <label htmlFor="password">Password:</label>
             <Input
               type="password"
               id="password"
               required
               onChange={onChangeHandler}
+              onKeyDown={event => {
+                if (event.keyCode === 13) {
+                  signIn();
+                }
+              }}
             />
           </form>
         </Fieldset>
