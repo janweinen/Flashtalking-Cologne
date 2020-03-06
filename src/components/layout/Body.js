@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
+import Dropzone from "../Dropzone";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -18,7 +19,6 @@ import {
   faCircleNotch
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
-import Dropzone from "../Dropzone";
 
 library.add(
   faSearch,

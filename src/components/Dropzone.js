@@ -74,7 +74,7 @@ const Dropzone = () => {
         device: "–",
         tags: "–",
         url:
-          "https://www.flashtalking.info/ftcologne/upload/" +
+          "https://www.flashtalking.info/app/upload/" +
           files[i].name.replace(/[^a-zA-Z0-9._]/g, ""),
         lastChanged: new Date().toLocaleString(),
         timestamp: new Date().getTime().toString(),
