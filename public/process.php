@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$errors[] = 'Extension not allowed: ' . $file_name . ' ' . $file_type;
 		}
 
-		if ($file_size > 33554432) {
+		if ($file_size > 209715200) {
 			$errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
 		}
 
