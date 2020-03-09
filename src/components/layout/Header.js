@@ -128,7 +128,7 @@ const Header = () => {
         <HeaderItemImageContainer>
           <HeaderItemImage src={Logo} alt="Logo" />
         </HeaderItemImageContainer>
-        <HeaderItemProductName>cologne</HeaderItemProductName>
+        <HeaderItemProductName>library</HeaderItemProductName>
       </HeaderSegment>
       <HeaderSegment>
         <HeaderItem>
