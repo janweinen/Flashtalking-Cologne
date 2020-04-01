@@ -34,6 +34,7 @@ export const firestoreDelete = async (collection, id) => {
 export const store = async (collection, doc, data, purpose) => {
   const storage = database.collection(collection).doc(doc);
   const snapshot = await storage.get();
+  let storing = true;
   if (snapshot.exists) {
     if (purpose === "dropzone") {
       if (window.confirm("Are you sure you wish to update this item?")) {
@@ -42,6 +43,8 @@ export const store = async (collection, doc, data, purpose) => {
         delete data.device;
         delete data.tags;
         storage.update(data);
+      } else {
+        storing = false;
       }
     } else {
       delete data.timestamp;
@@ -53,4 +56,5 @@ export const store = async (collection, doc, data, purpose) => {
       .doc(doc)
       .set(data);
   }
+  return storing;
 };

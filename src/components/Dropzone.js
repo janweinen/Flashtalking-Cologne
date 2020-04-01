@@ -64,6 +64,7 @@ const Dropzone = () => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     const formData = new FormData();
+    let storing = false;
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
       formData.append("files[]", file);
@@ -102,7 +103,7 @@ const Dropzone = () => {
           data.format = files[i].type;
           break;
       }
-      await store(
+      storing = await store(
         "Data",
         hashCode(files[i].name.replace(/[^a-zA-Z0-9._]/g, "")).toString(),
         data,
@@ -110,12 +111,15 @@ const Dropzone = () => {
       );
       dataContext.setContent.setContent("Upload");
     }
-    await fetch(url, {
-      method: "POST",
-      body: formData
-    }).then(response => {
-      console.log(response, files);
-    });
+    console.log(storing);
+    if (storing) {
+      await fetch(url, {
+        method: "POST",
+        body: formData
+      }).then(response => {
+        console.log(response, files);
+      });
+    }
     hideDropZone();
     setLoading(false);
   };
