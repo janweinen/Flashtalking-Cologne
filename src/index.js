@@ -8,7 +8,7 @@ import Body from "./components/layout/Body";
 import "./styles.css";
 
 const App = () => {
-  const returnNameFromEmail = email => {
+  const returnNameFromEmail = (email) => {
     if (typeof email !== "string") return "";
     const rawName = email.split("@");
     const names = rawName[0].split(".");
@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     let collection = {};
     try {
-      auth.onAuthStateChanged(user => {
+      auth.onAuthStateChanged((user) => {
         if (user) {
           collection = {
             signedIn: true,
@@ -35,10 +35,10 @@ const App = () => {
             .collection("Data")
             .where("category", "==", content)
             .orderBy("timestamp", "desc")
-            .onSnapshot(snapshot => {
+            .onSnapshot((snapshot) => {
               let entries = [];
               if (snapshot.size) {
-                snapshot.forEach(doc =>
+                snapshot.forEach((doc) =>
                   entries.push({ ...doc.data(), id: doc.id })
                 );
                 collection = {
@@ -59,7 +59,7 @@ const App = () => {
         }
       });
     } catch (error) {
-      console.log(error);
+      console.table(error);
     }
   }, [content]);
   return (

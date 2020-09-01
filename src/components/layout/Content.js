@@ -165,7 +165,7 @@ const Content = () => {
   const dataContext = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
@@ -180,8 +180,8 @@ const Content = () => {
         console.log(userData);
       }
       */
-      const results = await dataContext.entries.filter(item =>
-        Object.keys(item).some(key =>
+      const results = await dataContext.entries.filter((item) =>
+        Object.keys(item).some((key) =>
           item[key].toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
@@ -190,7 +190,7 @@ const Content = () => {
     init();
   }, [searchTerm, dataContext.entries, dataContext.content]);
 
-  const deleteItem = item => {
+  const deleteItem = (item) => {
     firestoreDelete("Data", item.id);
     fetch("delete.php?file=" + item.name, {
       method: "GET"
@@ -210,27 +210,51 @@ const Content = () => {
     dataContext.setContent.setContent("Demo");
     const data = {
       client: "",
-      category: "Demo",
       format: "",
       device: "",
       tags: "",
       url: "",
       lastChanged: new Date().toLocaleString(),
-      timestamp: new Date().getTime().toString(),
+      userName: dataContext.user.name,
       name: "",
+      timestamp: new Date().getTime().toString(),
+      category: "Demo",
       clientEditable: "true",
       formatEditable: "true",
       deviceEditable: "true",
       tagsEditable: "true",
       urlEditable: "true",
       userEmail: dataContext.user.email,
-      userName: dataContext.user.name,
       uid: dataContext.user.uid
     };
+    /*
+    var tableRef = document.getElementById("tbody");
+    // Insert a row in the table at row index 0
+    var newRow = tableRef.insertRow(0);
+
+    // Insert a cell in the row at index 0
+    // var newCell = newRow.insertCell(0);
+
+    for (let n = 0; n < 8; n++) {
+      let newCell = newRow.insertCell(n);
+      if (n === 5) {
+        newCell.contentEditable = "false";
+        //newCell.innerHTML = data.lastChanged;
+      } else if (n === 6) {
+        newCell.contentEditable = "false";
+        newCell.innerHTML = data.userName;
+      } else {
+        newCell.contentEditable = "true";
+      }
+    }
+*/
+    // Append a text node to the cell
+    //var newText = document.createTextNode("New row");
+    //newCell.appendChild(newText);
     await store("Data", data.timestamp, data);
   };
 
-  const isEditable = value => {
+  const isEditable = (value) => {
     if (value === "true") {
       return true;
     } else {
@@ -264,9 +288,11 @@ const Content = () => {
         <Table>
           <thead>
             <tr>
+              {/*
               <th>
                 <input type="checkbox" />
               </th>
+              */}
               <th>Client</th>
               <th>Format</th>
               <th>Device</th>
@@ -277,20 +303,22 @@ const Content = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {searchResults.map(item => (
+          <tbody id="tbody">
+            {searchResults.map((item) => (
               <tr key={item.id}>
+                {/*
                 <td>
                   <input type="checkbox" />
                 </td>
+                */}
                 <td
                   id="client"
                   contentEditable={isEditable(item.clientEditable)}
                   suppressContentEditableWarning={true}
-                  onBlur={e => {
+                  onBlur={(e) => {
                     updateItem(e, item);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       updateItem(e, item);
@@ -304,10 +332,10 @@ const Content = () => {
                   id="format"
                   contentEditable={isEditable(item.formatEditable)}
                   suppressContentEditableWarning={true}
-                  onBlur={e => {
+                  onBlur={(e) => {
                     updateItem(e, item);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       updateItem(e, item);
@@ -321,10 +349,10 @@ const Content = () => {
                   id="device"
                   contentEditable={isEditable(item.deviceEditable)}
                   suppressContentEditableWarning={true}
-                  onBlur={e => {
+                  onBlur={(e) => {
                     updateItem(e, item);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       updateItem(e, item);
@@ -338,10 +366,10 @@ const Content = () => {
                   id="tags"
                   contentEditable={isEditable(item.tagsEditable)}
                   suppressContentEditableWarning={true}
-                  onBlur={e => {
+                  onBlur={(e) => {
                     updateItem(e, item);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       updateItem(e, item);
@@ -355,10 +383,10 @@ const Content = () => {
                   id="url"
                   contentEditable={isEditable(item.urlEditable)}
                   suppressContentEditableWarning={true}
-                  onBlur={e => {
+                  onBlur={(e) => {
                     updateItem(e, item);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     if (e.keyCode === 13) {
                       e.preventDefault();
                       updateItem(e, item);

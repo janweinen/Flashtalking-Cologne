@@ -51,10 +51,7 @@ export const store = async (collection, doc, data, purpose) => {
       storage.update(data);
     }
   } else {
-    await database
-      .collection(collection)
-      .doc(doc)
-      .set(data);
+    await database.collection(collection).doc(doc).set(data);
   }
   return storing;
 };
