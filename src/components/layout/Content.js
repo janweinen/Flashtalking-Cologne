@@ -312,7 +312,7 @@ const Content = () => {
                 </td>
                 */}
                 <td
-                  id="client"
+                  className="client"
                   contentEditable={isEditable(item.clientEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={(e) => {
@@ -329,7 +329,7 @@ const Content = () => {
                   {item.client}
                 </td>
                 <td
-                  id="format"
+                  className="format"
                   contentEditable={isEditable(item.formatEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={(e) => {
@@ -346,7 +346,7 @@ const Content = () => {
                   {item.format}
                 </td>
                 <td
-                  id="device"
+                  className="device"
                   contentEditable={isEditable(item.deviceEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={(e) => {
@@ -363,7 +363,7 @@ const Content = () => {
                   {item.device}
                 </td>
                 <td
-                  id="tags"
+                  className="tags"
                   contentEditable={isEditable(item.tagsEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={(e) => {
@@ -380,7 +380,7 @@ const Content = () => {
                   {item.tags}
                 </td>
                 <td
-                  id="url"
+                  className="url"
                   contentEditable={isEditable(item.urlEditable)}
                   suppressContentEditableWarning={true}
                   onBlur={(e) => {

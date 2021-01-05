@@ -52,6 +52,15 @@ export const store = async (collection, doc, data, purpose) => {
     }
   } else {
     await database.collection(collection).doc(doc).set(data);
+    // copy the url to clipboard
+    if (purpose === "dropzone") {
+      let dummy = document.body.appendChild(document.createElement("input"));
+      dummy.value = data.url;
+      dummy.focus();
+      dummy.select();
+      document.execCommand("copy");
+      dummy.parentNode.removeChild(dummy);
+    }
   }
   return storing;
 };
