@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { authentication } from "../Firebase";
 import styled from "styled-components";
 import Background from "../../assets/images/ft_bg.jpg";
@@ -115,7 +115,7 @@ const Login = () => {
               type="email"
               id="email"
               onChange={onChangeHandler}
-              onKeyDown={event => {
+              onKeyDown={(event) => {
                 if (event.keyCode === 13) {
                   signIn();
                 }
@@ -127,7 +127,7 @@ const Login = () => {
               id="password"
               required
               onChange={onChangeHandler}
-              onKeyDown={event => {
+              onKeyDown={(event) => {
                 if (event.keyCode === 13) {
                   signIn();
                 }
