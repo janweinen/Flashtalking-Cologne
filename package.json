@@ -1,7 +1,7 @@
 {
   "homepage": "https://www.flashtalking.info/library",
   "name": "flashtalking-cologne",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
