@@ -198,9 +198,9 @@ const Content = () => {
   };
 
   const updateItem = async (e, item) => {
-    if (e.target.textContent !== item[e.target.id]) {
+    if (e.target.textContent !== item[e.target.className]) {
       await store("Data", item.id, {
-        [e.target.id]: e.target.textContent,
+        [e.target.className]: e.target.textContent,
         lastChanged: new Date().toLocaleString()
       });
     }
