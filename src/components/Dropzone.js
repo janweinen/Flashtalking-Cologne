@@ -39,7 +39,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-top: -5vw;
 `;
 
-const hashCode = s =>
+const hashCode = (s) =>
   s.split("").reduce((a, b) => {
     a = (a << 5) - a + b.charCodeAt(0);
     return a & a;
@@ -53,13 +53,13 @@ const Dropzone = () => {
   window.addEventListener("dragenter", () => {
     showDropZone();
   });
-  const allowDrag = event => {
+  const allowDrag = (event) => {
     if (true) {
       event.dataTransfer.dropEffect = "copy";
       event.preventDefault();
     }
   };
-  const handleDrop = async event => {
+  const handleDrop = async (event) => {
     setLoading(true);
     event.preventDefault();
     const files = event.dataTransfer.files;
@@ -93,6 +93,9 @@ const Dropzone = () => {
         case files[i].name.indexOf("pptx") !== -1:
           data.format = "powerpoint/pptx";
           break;
+        case files[i].name.indexOf("ppsx") !== -1:
+          data.format = "powerpoint/ppsx";
+          break;
         case files[i].name.indexOf("docx") !== -1:
           data.format = "word/docx";
           break;
@@ -116,7 +119,7 @@ const Dropzone = () => {
       await fetch(url, {
         method: "POST",
         body: formData
-      }).then(response => {
+      }).then((response) => {
         console.log(response, files);
       });
     }
