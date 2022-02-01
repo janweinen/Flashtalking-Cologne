@@ -48,6 +48,8 @@ const App = () => {
                   setContent: { setContent },
                   unsubscribe: { unsubscribe }
                 };
+                // DB DUMP
+                //console.log(collection.entries)
                 setData(collection);
               }
             });
