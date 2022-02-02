@@ -8,14 +8,74 @@ import Body from "./components/layout/Body";
 import "./styles.css";
 
 const App = () => {
-  const returnNameFromEmail = (email) => {
-    if (typeof email !== "string") return "";
-    const rawName = email.split("@");
+  const returnNameFromEmail = (user) => {
+    if (typeof user.email !== "string") return "";
+    const rawName = user.email;
+    const name = rawName.split("@");
+    let fullName = "User";
     //const names = rawName[0].split(".");
     //const forname = names[0].charAt(0).toUpperCase() + names[0].slice(1);
     //const surname = names[1].charAt(0).toUpperCase() + names[1].slice(1);
     //return forname + " " + surname;
-    return rawName[0];
+    switch (name[0]) {
+      case "jphoelich":
+        fullName = "Joost Phoelich";
+        break;
+      case "sbazec":
+        fullName = "Sonia Bazec";
+        break;
+      case "tschloesser":
+        fullName = "Thorben Schlösser";
+        break;
+      case "ssuhre":
+        fullName = "Sebastian Suhre";
+        break;
+      case "flefering":
+        fullName = "Frank Lefering";
+        break;
+      case "shennigfeld":
+        fullName = "Stefanie Hennigfeld";
+        break;
+      case "caltemeier":
+        fullName = "Christian Altemeier";
+        break;
+      case "hpflug":
+        fullName = "Heike Pflug";
+        break;
+      case "agreve":
+        fullName = "Alexander Greve";
+        break;
+      case "iweinen":
+        fullName = "Ina Weinen";
+        break;
+      case "lisenberg":
+        fullName = "Lukas Isenberg";
+        break;
+      case "sgharehbaghi":
+        fullName = "Solmaz Gharehbaghi";
+        break;
+      case "gdipalma":
+        fullName = "Gianna Di Palma";
+        break;
+      case "oguezey":
+        fullName = "Orhun Güzey";
+        break;
+      case "jweinen":
+        fullName = "Jan Weinen";
+        break;
+      case "cthelen":
+        fullName = "Christian Thelen";
+        break;
+      case "rschmeisser":
+        fullName = "Ronny Schmeisser";
+        break;
+      case "hsachs":
+        fullName = "Heiko Sachs";
+        break;
+      default:
+        fullName = "User";
+    }
+    return fullName;
   };
   const [data, setData] = useState({ signedIn: false });
   const [content, setContent] = useState("Demo");
@@ -29,7 +89,7 @@ const App = () => {
             user: {
               uid: user.uid,
               email: user.email,
-              name: returnNameFromEmail(user.email)
+              name: returnNameFromEmail(user)
             }
           };
           const unsubscribe = database
