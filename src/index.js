@@ -18,6 +18,9 @@ const App = () => {
     //const surname = names[1].charAt(0).toUpperCase() + names[1].slice(1);
     //return forname + " " + surname;
     switch (name[0]) {
+      case "cnachmias":
+        fullName = "Christopher Nachmias";
+        break;
       case "jphoelich":
         fullName = "Joost Phoelich";
         break;
