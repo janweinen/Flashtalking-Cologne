@@ -18,6 +18,15 @@ const App = () => {
     //const surname = names[1].charAt(0).toUpperCase() + names[1].slice(1);
     //return forname + " " + surname;
     switch (name[0]) {
+      case "mmilosevic":
+        fullName = "Milos Milosevic";
+        break;
+      case "gstrbo":
+        fullName = "Goran Strbo";
+        break;
+      case "jcrickett":
+        fullName = "John Crickett";
+        break;
       case "cnachmias":
         fullName = "Christopher Nachmias";
         break;
@@ -92,8 +101,8 @@ const App = () => {
             user: {
               uid: user.uid,
               email: user.email,
-              name: returnNameFromEmail(user)
-            }
+              name: returnNameFromEmail(user),
+            },
           };
           const unsubscribe = database
             .collection("Data")
@@ -103,21 +112,21 @@ const App = () => {
               let entries = [];
               if (snapshot.size) {
                 snapshot.forEach((doc) =>
-                  entries.push({ ...doc.data(), id: doc.id })
+                  entries.push({ ...doc.data(), id: doc.id }),
                 );
                 collection = {
                   ...collection,
                   entries: entries,
                   content: content,
                   setContent: { setContent },
-                  unsubscribe: { unsubscribe }
+                  unsubscribe: { unsubscribe },
                 };
                 setData(collection);
               }
             });
         } else {
           collection = {
-            signedIn: false
+            signedIn: false,
           };
           setData(collection);
         }
