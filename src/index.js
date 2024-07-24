@@ -30,9 +30,6 @@ const App = () => {
       case "cnachmias":
         fullName = "Christopher Nachmias";
         break;
-      case "jphoelich":
-        fullName = "Joost Phoelich";
-        break;
       case "sbazec":
         fullName = "Sonia Bazec";
         break;

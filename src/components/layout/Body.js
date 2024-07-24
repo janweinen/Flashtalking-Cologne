@@ -16,7 +16,7 @@ import {
   faDesktop,
   faUser,
   faSignOutAlt,
-  faCircleNotch
+  faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 
@@ -31,15 +31,15 @@ library.add(
   faDesktop,
   faUser,
   faSignOutAlt,
-  faCircleNotch
+  faCircleNotch,
 );
 
 const style = {
   body: {
     height: "100vh",
     fontFamily: "Open Sans",
-    backgroundColor: "#f4f5f5"
-  }
+    backgroundColor: "#f4f5f5",
+  },
 };
 
 const Body = () => {
